@@ -24,6 +24,9 @@ Abra o projeto utiliando a IDE, em seguida, abra o arquivo `src/main/java/com/ag
 Na lateral esquerda do indicador da linha onde se encontra o método `main`, haverá um ícone (play) para executar a aplicação.
 Quando executar, a IDE mostrará os logs e se tudo correr bem, o Tomcat estará escutando as requisições no `localhos:8080`.
 
+Para verificar se está tudo em ordem, faça uma requisição `GET` no endpoint `http://localhost:8080/home/`.
+Deverá retornar uma resposta com status `200 OK` e uma string.
+
 ## TO-DO
 
 - [ ] Autenticação JWT
