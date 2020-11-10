@@ -17,7 +17,7 @@ public class HomeController {
     @GetMapping("")
     public Teste welcome() {
         Teste usu;
-        usu = new Teste( 1L, "Elvis", 30);
+        usu = new Teste("Elvis", 30);
         tr.save(usu);
 
         return usu;

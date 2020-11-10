@@ -10,8 +10,8 @@ public class Teste implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     @Column(name = "nome")
     private String nome;
@@ -43,12 +43,11 @@ public class Teste implements Serializable {
         this.idade = idade;
     }
 
-
     public Teste() {
 
     }
-    public Teste(Long id, String nome, Integer idade) {
-        this.id = id;
+
+    public Teste(String nome, Integer idade) {
         this.nome = nome;
         this.idade = idade;
     }
