@@ -24,8 +24,12 @@ Abra o projeto utiliando a IDE, em seguida, abra o arquivo `src/main/java/com/ag
 Na lateral esquerda do indicador da linha onde se encontra o método `main`, haverá um ícone (play) para executar a aplicação.
 Quando executar, a IDE mostrará os logs e se tudo correr bem, o Tomcat estará escutando as requisições no `localhos:8080`.
 
-Para verificar se está tudo em ordem, faça uma requisição `GET` no endpoint `http://localhost:8080/home/`.
+Para verificar se está tudo em ordem, faça uma requisição `GET` no endpoint `http://localhost:8080/`.
 Deverá retornar uma resposta com status `200 OK` e uma string.
+
+Ao visitar `http://localhost:8080/h2-console` tem-se acesso a uma interface do  h2databse, preencha o campo Seetting
+Name com Generic PostgreSQL e os outros campos conforme as configurações do banco de dados. A partir daí é possivel ter acesso
+a uma interface para manipular a base de dados.
 
 ## TO-DO
 
