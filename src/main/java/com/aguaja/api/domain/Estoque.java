@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rafaelpvs.course.entities.Produto;
+import com.rafaelpvs.course.entities.Vendedor;
 
 @Entity
 @Table(name = "tb_estoque")
@@ -27,6 +29,15 @@ public class Estoque implements Serializable{
 	private Double preco_custo;
 	private Double preco_venda;
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="vendedor_id")
+	private Vendedor vendedor;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="produto_id")
+	private Produto produto;
 	
 	public Estoque() {
 		super();
@@ -70,7 +81,18 @@ public class Estoque implements Serializable{
 		this.preco_venda = preco_venda;
 	}
 	
-	
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
+	}
+	public Produto getProduto() {
+		return produto;
+	}
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 	
 	@Override
 	public int hashCode() {
