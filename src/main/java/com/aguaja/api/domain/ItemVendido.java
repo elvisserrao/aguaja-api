@@ -3,7 +3,10 @@ package com.aguaja.api.domain;
 import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
-
+import javax.persistence.Entity;
+import javax.persistence.Table;
+@Entity
+@Table(name = "tb_item_vendido")
 public class ItemVendido implements Serializable{
 	private static final long serialVersionUID = 1L;
 
