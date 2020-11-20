@@ -2,11 +2,16 @@ package com.aguaja.api.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +29,17 @@ public class Cliente implements Serializable{
 	private String login;
 	private String senha;
 	
+	@OneToOne
+	@JoinColumn(name="telefone_id")
+	private Telefone telefone;
+	
+	
+	@OneToOne
+	@JoinColumn(name="endereco_id")
+	private Endereco endereco;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Venda> vendas = new ArrayList<>();
 	
 	
 	public Cliente() {
@@ -84,7 +100,25 @@ public class Cliente implements Serializable{
 		this.senha = senha;
 	}
 	
-	
+	public Telefone getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(Telefone telefone) {
+		this.telefone = telefone;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public List<Venda> getVendas() {
+		return vendas;
+	}
 	
 
 	@Override
