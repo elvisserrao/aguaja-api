@@ -1,10 +1,13 @@
 package com.aguaja.api.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-public class ItemVendidoPK {
-	
+public class ItemVendidoPK implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne
 	@JoinColumn(name = "venda_id")
 	private Venda venda;
