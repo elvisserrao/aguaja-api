@@ -11,24 +11,25 @@ public class ItemVendidoPK implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "venda_id")
 	private Venda venda;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "produto_id")
 	private Produto produto;
-	
-	
+
 	public Venda getVenda() {
 		return venda;
 	}
 	public void setVenda(Venda venda) {
 		this.venda = venda;
 	}
+
 	public Produto getProduto() {
 		return produto;
 	}
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -37,6 +38,7 @@ public class ItemVendidoPK implements Serializable{
 		result = prime * result + ((venda == null) ? 0 : venda.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -58,7 +60,4 @@ public class ItemVendidoPK implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
 }

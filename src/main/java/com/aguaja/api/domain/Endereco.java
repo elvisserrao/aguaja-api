@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "tb_endereco")
 public class Endereco implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -24,18 +24,15 @@ public class Endereco implements Serializable{
 	private String bairro;
 	private Integer numero;
 	private String complemento;
-	
+
 	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
-	
-	
-	
+
 	public Endereco() {
 		super();
 	}
-
 
 	public Endereco(Integer id, String logradouro, String bairro, Integer numero, String complemento) {
 		this.id = id;
@@ -45,48 +42,47 @@ public class Endereco implements Serializable{
 		this.complemento = complemento;
 	}
 	
-	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getLogradouro() {
 		return logradouro;
 	}
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
+
 	public String getBairro() {
 		return bairro;
 	}
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
+
 	public Integer getNumero() {
 		return numero;
 	}
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
+
 	public String getComplemento() {
 		return complemento;
 	}
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	
-	
+
 	public Cliente getCliente() {
 		return cliente;
 	}
-
-
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -95,6 +91,7 @@ public class Endereco implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -111,6 +108,4 @@ public class Endereco implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 }

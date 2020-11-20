@@ -12,25 +12,25 @@ public class ItemVendido implements Serializable{
 
 	@EmbeddedId
 	private ItemVendidoPK id = new ItemVendidoPK();
-	
-	
+
 	private Integer quantidade;
-	
+
 	public ItemVendido() {
 	}
+
 	public ItemVendido(Venda venda, Produto produto,Integer quantidade) {
 		id.setVenda(venda);
 		id.setProduto(produto);
 		this.quantidade = quantidade;
 	}
-	
+
 	public Venda getVenda() {
 		return id.getVenda();
 	}
 	public void setVenda(Venda venda) {
 		id.setVenda(venda);
 	}
-	
+
 	public Produto getProduto() {
 		return id.getProduto();
 	}
@@ -41,7 +41,6 @@ public class ItemVendido implements Serializable{
 	public Integer getQuantidade() {
 		return quantidade;
 	}
-
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
@@ -70,6 +69,4 @@ public class ItemVendido implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 }
