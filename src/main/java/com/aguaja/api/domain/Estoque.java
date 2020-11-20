@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.rafaelpvs.course.entities.Produto;
-import com.rafaelpvs.course.entities.Vendedor;
 
 @Entity
 @Table(name = "tb_estoque")

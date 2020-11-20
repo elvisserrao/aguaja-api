@@ -24,7 +24,8 @@ public class Telefone implements Serializable{
 	@OneToOne(mappedBy = "telefone")
 	private Cliente cliente;
 	
-	
+	@OneToOne(mappedBy = "telefone")
+	private Vendedor vendedor;
 	
 	
 	public Telefone() {
@@ -61,6 +62,13 @@ public class Telefone implements Serializable{
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 	
 	@Override
