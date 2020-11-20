@@ -7,13 +7,14 @@ import javax.persistence.EmbeddedId;
 public class ItemVendido implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-
+	@EmbeddedId
 	private ItemVendidoPK id = new ItemVendidoPK();
 	
-	@EmbeddedId
+	
 	private Integer quantidade;
 	
-	
+	public ItemVendido() {
+	}
 	public ItemVendido(Venda venda, Produto produto,Integer quantidade) {
 		id.setVenda(venda);
 		id.setProduto(produto);

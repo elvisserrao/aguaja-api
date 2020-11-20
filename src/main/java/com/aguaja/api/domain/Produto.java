@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_produto")
 public class Produto implements Serializable{
@@ -25,11 +27,13 @@ public class Produto implements Serializable{
 	private Double litros;
 	private String descricao;
 	
-	@OneToMany(mappedBy = "id.venda")
-	private Set<ItemVendido> items = new HashSet<>();
+	
 	
 	@OneToMany(mappedBy = "produto")
 	private List<Estoque> estoques = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemVendido> items = new HashSet<>();
 	
 	private Produto() {
 		super();
@@ -70,6 +74,16 @@ public class Produto implements Serializable{
 	public List<Estoque> getEstoques() {
 		return estoques;
 	}
+	
+	@JsonIgnore
+	public Set<Venda> getVendas(){
+		Set<Venda> set = new HashSet<>();
+		for(ItemVendido  x : items) {
+			set.add(x.getVenda());
+		}
+		return set;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
