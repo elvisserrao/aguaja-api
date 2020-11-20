@@ -2,7 +2,9 @@ package com.aguaja.api.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +24,9 @@ public class Produto implements Serializable{
 	private String nome;
 	private Double litros;
 	private String descricao;
+	
+	@OneToMany(mappedBy = "id.venda")
+	private Set<ItemVendido> items = new HashSet<>();
 	
 	@OneToMany(mappedBy = "produto")
 	private List<Estoque> estoques = new ArrayList<>();
