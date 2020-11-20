@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.aguaja.api.domain.enums.VendaStatus;
+
 @Entity
 @Table(name = "tb_venda")
 public class Venda implements Serializable{
@@ -23,6 +25,8 @@ public class Venda implements Serializable{
 	private Double preco;
 	private Double desconto;
 	private Double preco_total;
+	
+	private Integer vendaStatus;
 	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
@@ -37,7 +41,7 @@ public class Venda implements Serializable{
 	public Venda() {
 		super();
 	}
-	public Venda(Integer id, Instant data, Double preco, Double desconto, Double preco_total) {
+	public Venda(Integer id, Instant data, Double preco, Double desconto, Double preco_total, VendaStatus vendastatus) {
 		super();
 		this.id = id;
 		this.data = data;
@@ -74,6 +78,15 @@ public class Venda implements Serializable{
 	}
 	public void setPreco_total(Double preco_total) {
 		this.preco_total = preco_total;
+	}
+	
+	public VendaStatus getOrderStatus() {
+		return VendaStatus.valueOf(vendaStatus);
+	}
+	public void setOrderStatus(VendaStatus vendaStatus) {
+		if(vendaStatus != null) {
+			this.vendaStatus = vendaStatus.getCode();
+		}
 	}
 	
 	
