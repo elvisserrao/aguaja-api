@@ -29,7 +29,9 @@ public class Venda implements Serializable{
 	private Cliente cliente;
 	
 
-	
+	@ManyToOne
+	@JoinColumn(name = "vendedor_id")
+	private Vendedor vendedor;
 	
 	
 	public Venda() {
@@ -80,6 +82,13 @@ public class Venda implements Serializable{
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 	
 	@Override
