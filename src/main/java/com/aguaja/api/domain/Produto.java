@@ -24,15 +24,16 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double litros;
 	private String descricao;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "produto")
 	private List<Estoque> estoques = new ArrayList<>();
 
-	private Produto() {
+	public Produto() {
 		super();
 	}
 
-	private  Produto(Integer id, String nome, Double litros, String descricao) {
+	public Produto(Integer id, String nome, Double litros, String descricao) {
 		super();
 		this.id = id;
 		this.nome = nome;
