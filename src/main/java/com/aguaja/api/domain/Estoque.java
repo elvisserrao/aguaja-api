@@ -2,6 +2,8 @@ package com.aguaja.api.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,6 +38,9 @@ public class Estoque implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="produto_id")
 	private Produto produto;
+
+	@OneToMany(mappedBy = "id.estoque")
+	private Set<ItemVendido> items = new HashSet<>();
 
 	public Estoque() {
 		super();
@@ -96,6 +102,15 @@ public class Estoque implements Serializable{
 	}
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+	
+	@JsonIgnore
+	public Set<Venda> getVendas(){
+		Set<Venda> set = new HashSet<>();
+		for(ItemVendido  x : items) {
+			set.add(x.getVenda());
+		}
+		return set;
 	}
 
 	@Override
