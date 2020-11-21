@@ -20,7 +20,7 @@ public class ItemVendido implements Serializable{
 	public ItemVendido() {
 	}
 
-	public ItemVendido(Venda venda, Estoque estoque,Integer quantidade) {
+	public ItemVendido(Venda venda, Estoque estoque, Integer quantidade) {
 		id.setVenda(venda);
 		id.setEstoque(estoque);
 		this.quantidade = quantidade;
