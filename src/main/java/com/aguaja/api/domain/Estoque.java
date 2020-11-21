@@ -29,12 +29,10 @@ public class Estoque implements Serializable{
 	private Double preco_custo;
 	private Double preco_venda;
 
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="vendedor_id")
 	private Vendedor vendedor;
-
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="produto_id")
 	private Produto produto;
