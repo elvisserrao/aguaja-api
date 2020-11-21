@@ -2,9 +2,7 @@ package com.aguaja.api.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_produto")
-public class Produto implements Serializable{
+public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,15 +24,16 @@ public class Produto implements Serializable{
 	private String nome;
 	private Double litros;
 	private String descricao;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "produto")
 	private List<Estoque> estoques = new ArrayList<>();
 
-	private Produto() {
+	public Produto() {
 		super();
 	}
 
-	private  Produto(Integer id, String nome, Double litros, String descricao) {
+	public Produto(Integer id, String nome, Double litros, String descricao) {
 		super();
 		this.id = id;
 		this.nome = nome;

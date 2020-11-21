@@ -29,12 +29,10 @@ public class Estoque implements Serializable{
 	private Double preco_custo;
 	private Double preco_venda;
 
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="vendedor_id")
 	private Vendedor vendedor;
-
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="produto_id")
 	private Produto produto;
@@ -46,9 +44,10 @@ public class Estoque implements Serializable{
 		super();
 	}
 
-	public Estoque(Integer id, Integer quantidade, Instant data_entrada, Double preco_custo, Double preco_venda) {
+	public Estoque(Integer id, Produto produto, Integer quantidade, Instant data_entrada, Double preco_custo, Double preco_venda) {
 		super();
 		this.id = id;
+		this.produto = produto;
 		this.quantidade = quantidade;
 		this.data_entrada = data_entrada;
 		this.preco_custo = preco_custo;
