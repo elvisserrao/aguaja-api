@@ -18,9 +18,9 @@ public class ItemVendido implements Serializable{
 	public ItemVendido() {
 	}
 
-	public ItemVendido(Venda venda, Produto produto,Integer quantidade) {
+	public ItemVendido(Venda venda, Estoque estoque,Integer quantidade) {
 		id.setVenda(venda);
-		id.setProduto(produto);
+		id.setEstoque(estoque);
 		this.quantidade = quantidade;
 	}
 
@@ -31,11 +31,11 @@ public class ItemVendido implements Serializable{
 		id.setVenda(venda);
 	}
 
-	public Produto getProduto() {
-		return id.getProduto();
+	public Estoque getEstoque() {
+		return id.getEstoque();
 	}
-	public void setProduto(Produto produto) {
-		id.setProduto(produto);
+	public void setEstoque(Estoque estoque) {
+		id.setEstoque(estoque);
 	}
 
 	public Integer getQuantidade() {

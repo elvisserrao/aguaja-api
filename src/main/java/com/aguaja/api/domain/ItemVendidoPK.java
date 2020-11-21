@@ -13,8 +13,8 @@ public class ItemVendidoPK implements Serializable{
 	private Venda venda;
 
 	@ManyToOne
-	@JoinColumn(name = "produto_id")
-	private Produto produto;
+	@JoinColumn(name = "estoque_id")
+	private Estoque estoque;
 
 	public Venda getVenda() {
 		return venda;
@@ -23,18 +23,18 @@ public class ItemVendidoPK implements Serializable{
 		this.venda = venda;
 	}
 
-	public Produto getProduto() {
-		return produto;
+	public Estoque getEstoque() {
+		return estoque;
 	}
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setEstoque(Estoque estoque) {
+		this.estoque = estoque;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
+		result = prime * result + ((estoque == null) ? 0 : estoque.hashCode());
 		result = prime * result + ((venda == null) ? 0 : venda.hashCode());
 		return result;
 	}
@@ -48,10 +48,10 @@ public class ItemVendidoPK implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ItemVendidoPK other = (ItemVendidoPK) obj;
-		if (produto == null) {
-			if (other.produto != null)
+		if (estoque == null) {
+			if (other.estoque != null)
 				return false;
-		} else if (!produto.equals(other.produto))
+		} else if (!estoque.equals(other.estoque))
 			return false;
 		if (venda == null) {
 			if (other.venda != null)
