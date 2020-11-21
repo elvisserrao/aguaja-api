@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_item_vendido")
 public class ItemVendido implements Serializable{
@@ -23,7 +25,8 @@ public class ItemVendido implements Serializable{
 		id.setEstoque(estoque);
 		this.quantidade = quantidade;
 	}
-
+	
+	@JsonIgnore
 	public Venda getVenda() {
 		return id.getVenda();
 	}
