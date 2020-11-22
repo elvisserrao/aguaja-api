@@ -2,6 +2,8 @@ package com.aguaja.api.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -40,5 +42,26 @@ public class ClienteServico {
 			throw new DatabaseException(e.getMessage());
 		}
 
+	}
+	
+	public Cliente update(Long id, Cliente obj) {
+
+		try {
+			Cliente entity = repository.getOne(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+
+	}
+	
+	private void updateData(Cliente entity, Cliente obj) {
+		entity.setNome(obj.getNome());
+		entity.setSexo(obj.getSexo());
+		entity.setEmail(obj.getEmail());
+		entity.setDataNascimento(obj.getDataNascimento());
+		entity.setLogin(obj.getLogin());
+		entity.setSenha(obj.getSenha());
 	}
 }
