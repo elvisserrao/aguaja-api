@@ -26,6 +26,11 @@ public class ClienteServico {
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
+	public Cliente insert(Cliente obj) {
+		repository.save(obj);
+		return obj;
+	}
+	
 	public void delete(Long id) {
 		try {
 			repository.deleteById(id);
