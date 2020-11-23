@@ -8,44 +8,44 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_item_vendido")
-public class ItemVendido implements Serializable{
+@Table(name = "tb_order_item")
+public class OrderItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private ItemVendidoPK id = new ItemVendidoPK();
+	private OrderItemPK id = new OrderItemPK();
 
-	private Integer quantidade;
+	private Integer quantity;
 
-	public ItemVendido() {
+	public OrderItem() {
 	}
 
-	public ItemVendido(Venda venda, Estoque estoque, Integer quantidade) {
-		id.setVenda(venda);
-		id.setEstoque(estoque);
-		this.quantidade = quantidade;
+	public OrderItem(Order order, Stock stock, Integer quantity) {
+		id.setOrder(order);
+		id.setStock(stock);
+		this.quantity = quantity;
 	}
 	
 	@JsonIgnore
-	public Venda getVenda() {
-		return id.getVenda();
+	public Order getOrder() {
+		return id.getOrder();
 	}
-	public void setVenda(Venda venda) {
-		id.setVenda(venda);
-	}
-
-	public Estoque getEstoque() {
-		return id.getEstoque();
-	}
-	public void setEstoque(Estoque estoque) {
-		id.setEstoque(estoque);
+	public void setOrder(Order order) {
+		id.setOrder(order);
 	}
 
-	public Integer getQuantidade() {
-		return quantidade;
+	public Stock getStock() {
+		return id.getStock();
 	}
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+	public void setStock(Stock stock) {
+		id.setStock(stock);
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class ItemVendido implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ItemVendido other = (ItemVendido) obj;
+		OrderItem other = (OrderItem) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
