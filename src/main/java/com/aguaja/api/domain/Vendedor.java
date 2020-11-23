@@ -15,45 +15,45 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_vendedor")
-public class Vendedor implements Serializable{
+@Table(name = "tb_seller")
+public class Seller implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
-	private Integer sexo;
-	private Instant dataNascimento;
+	private String name;
+	private Integer gender;
+	private Instant birthDate;
 	private String login;
-	private String senha;
+	private String password;
 	private String email;
 	private Integer admin;
 
 	@OneToOne
-	@JoinColumn(name="telefone_id")
-	private Telefone telefone;
+	@JoinColumn(name="phone_id")
+	private Phone phone;
 
 	@OneToOne
-	@JoinColumn(name="endereco_id")
-	private Endereco endereco;
+	@JoinColumn(name="address_id")
+	private Address address;
 
-	@OneToMany(mappedBy = "vendedor")
-	private List<Venda> vendas = new ArrayList<>();
+	@OneToMany(mappedBy = "seller")
+	private List<Order> orders = new ArrayList<>();
 
-	public Vendedor() {
+	public Seller() {
 		super();
 	}
 
-	public Vendedor(Integer id, String nome, Integer sexo, Instant dataNascimento, String login, String senha,
+	public Seller(Integer id, String name, Integer gender, Instant birthDate, String login, String password,
 			String email, Integer admin) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.sexo = sexo;
-		this.dataNascimento = dataNascimento;
+		this.name = name;
+		this.gender = gender;
+		this.birthDate = birthDate;
 		this.login = login;
-		this.senha = senha;
+		this.password = password;
 		this.email = email;
 		this.admin = admin;
 	}
@@ -65,25 +65,25 @@ public class Vendedor implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Integer getSexo() {
-		return sexo;
-	}
-	public void setSexo(Integer sexo) {
-		this.sexo = sexo;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Instant getDataNascimento() {
-		return dataNascimento;
+	public Integer getGender() {
+		return gender;
 	}
-	public void setDataNascimento(Instant dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setGender(Integer gender) {
+		this.gender = gender;
+	}
+
+	public Instant getBirthDate() {
+		return birthDate;
+	}
+	public void setBirthDate(Instant birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public String getLogin() {
@@ -93,11 +93,11 @@ public class Vendedor implements Serializable{
 		this.login = login;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -114,22 +114,22 @@ public class Vendedor implements Serializable{
 		this.admin = admin;
 	}
 
-	public Telefone getTelefone() {
-		return telefone;
+	public Phone getPhone() {
+		return phone;
 	}
-	public void setTelefone(Telefone telefone) {
-		this.telefone = telefone;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setPhone(Phone phone) {
+		this.phone = phone;
 	}
 
-	public List<Venda> getVendas() {
-		return vendas;
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	@Override
@@ -148,7 +148,7 @@ public class Vendedor implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Vendedor other = (Vendedor) obj;
+		Seller other = (Seller) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
