@@ -10,31 +10,31 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_telefone")
-public class Telefone implements Serializable{
+@Table(name = "tb_phone")
+public class Phone implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String ddd;
-	private String numero;
+	private String number;
 
-	@OneToOne(mappedBy = "telefone")
-	private Cliente cliente;
+	@OneToOne(mappedBy = "phone")
+	private Client client;
 
-	@OneToOne(mappedBy = "telefone")
-	private Vendedor vendedor;
+	@OneToOne(mappedBy = "phone")
+	private Seller seller;
 
-	public Telefone() {
+	public Phone() {
 		super();
 	}
 
-	public Telefone(Integer id, String ddd, String numero) {
+	public Phone(Integer id, String ddd, String number) {
 		super();
 		this.id = id;
 		this.ddd = ddd;
-		this.numero = numero;
+		this.number = number;
 	}
 
 	public Integer getId() {
@@ -51,25 +51,25 @@ public class Telefone implements Serializable{
 		this.ddd = ddd;
 	}
 
-	public String getNumero() {
-		return numero;
+	public String getNumber() {
+		return number;
 	}
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
-	public Vendedor getVendedor() {
-		return vendedor;
+	public Client getClient() {
+		return client;
 	}
-	public void setVendedor(Vendedor vendedor) {
-		this.vendedor = vendedor;
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Seller getSeller() {
+		return seller;
+	}
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class Telefone implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Telefone other = (Telefone) obj;
+		Phone other = (Phone) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
