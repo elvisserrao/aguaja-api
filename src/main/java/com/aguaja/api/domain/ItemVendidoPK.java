@@ -7,37 +7,37 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class ItemVendidoPK implements Serializable{
+public class OrderItemPK implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
-	@JoinColumn(name = "venda_id")
-	private Venda venda;
+	@JoinColumn(name = "order_id")
+	private Order order;
 
 	@ManyToOne
-	@JoinColumn(name = "estoque_id")
-	private Estoque estoque;
+	@JoinColumn(name = "stock_id")
+	private Stock stock;
 
-	public Venda getVenda() {
-		return venda;
+	public Order getOrder() {
+		return order;
 	}
-	public void setVenda(Venda venda) {
-		this.venda = venda;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
-	public Estoque getEstoque() {
-		return estoque;
+	public Stock getStock() {
+		return stock;
 	}
-	public void setEstoque(Estoque estoque) {
-		this.estoque = estoque;
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((estoque == null) ? 0 : estoque.hashCode());
-		result = prime * result + ((venda == null) ? 0 : venda.hashCode());
+		result = prime * result + ((stock == null) ? 0 : stock.hashCode());
+		result = prime * result + ((order == null) ? 0 : order.hashCode());
 		return result;
 	}
 
@@ -49,16 +49,16 @@ public class ItemVendidoPK implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ItemVendidoPK other = (ItemVendidoPK) obj;
-		if (estoque == null) {
-			if (other.estoque != null)
+		OrderItemPK other = (OrderItemPK) obj;
+		if (stock == null) {
+			if (other.stock != null)
 				return false;
-		} else if (!estoque.equals(other.estoque))
+		} else if (!stock.equals(other.stock))
 			return false;
-		if (venda == null) {
-			if (other.venda != null)
+		if (order == null) {
+			if (other.order != null)
 				return false;
-		} else if (!venda.equals(other.venda))
+		} else if (!order.equals(other.order))
 			return false;
 		return true;
 	}
