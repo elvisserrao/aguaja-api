@@ -10,26 +10,26 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.aguaja.api.domain.Produto;
-import com.aguaja.api.repositories.ProdutoRepositorio;
+import com.aguaja.api.domain.Stock;
+import com.aguaja.api.repositories.StockRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class ProdutoServico {
+public class StockServico {
 	@Autowired
-	private ProdutoRepositorio repository;
+	private StockRepository repository;
 	
-	public List<Produto> findAll(){
+	public List<Stock> findAll(){
 		return repository.findAll();
 	}
 	
-	public Produto findById(Long id) {
-		Optional<Produto> obj = repository.findById(id);
+	public Stock findById(Long id) {
+		Optional<Stock> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Produto insert(Produto obj) {
+	public Stock insert(Stock obj) {
 		repository.save(obj);
 		return obj;
 	}
@@ -45,10 +45,10 @@ public class ProdutoServico {
 		
 	}
 	
-	public Produto update(Long id, Produto obj) {
+	public Stock update(Long id, Stock obj) {
 		
 		try {			
-			Produto entity = repository.getOne(id);
+			Stock entity = repository.getOne(id);
 			updateData(entity, obj);
 			return repository.save(entity);
 		}
@@ -58,9 +58,10 @@ public class ProdutoServico {
 		
 	}
 
-	private void updateData(Produto entity, Produto obj) {
-		entity.setNome(obj.getNome());
-		entity.setLitros(obj.getLitros());
-		entity.setDescricao(obj.getDescricao());
+	private void updateData(Stock entity, Stock obj) {
+		entity.setQuantity(obj.getQuantity());
+		entity.setEntryDate(obj.getEntryDate());
+		entity.setCostPrice(obj.getCostPrice());
+		entity.setCostSell(obj.getCostSell());
 	}
 }

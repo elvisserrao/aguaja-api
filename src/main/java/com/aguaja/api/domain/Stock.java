@@ -82,10 +82,10 @@ public class Stock implements Serializable{
 		this.costPrice = costPrice;
 	}
 
-	public Double getPreco_venda() {
+	public Double getCostSell() {
 		return costSell;
 	}
-	public void setPreco_venda(Double costSell) {
+	public void setCostSell(Double costSell) {
 		this.costSell = costSell;
 	}
 

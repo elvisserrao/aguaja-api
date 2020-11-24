@@ -10,26 +10,26 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.aguaja.api.domain.Vendedor;
-import com.aguaja.api.repositories.VendedorRepositorio;
+import com.aguaja.api.domain.Phone;
+import com.aguaja.api.repositories.PhoneRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class VendedorServico {
+public class PhoneServico {
 	@Autowired
-	private VendedorRepositorio repository;
+	private PhoneRepository repository;
 	
-	public List<Vendedor> findAll(){
+	public List<Phone> findAll(){
 		return repository.findAll();
 	}
 	
-	public Vendedor findById(Long id) {
-		Optional<Vendedor> obj = repository.findById(id);
+	public Phone findById(Long id) {
+		Optional<Phone> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Vendedor insert(Vendedor obj) {
+	public Phone insert(Phone obj) {
 		repository.save(obj);
 		return obj;
 	}
@@ -45,10 +45,10 @@ public class VendedorServico {
 		
 	}
 	
-	public Vendedor update(Long id, Vendedor obj) {
+	public Phone update(Long id, Phone obj) {
 		
 		try {			
-			Vendedor entity = repository.getOne(id);
+			Phone entity = repository.getOne(id);
 			updateData(entity, obj);
 			return repository.save(entity);
 		}
@@ -58,15 +58,9 @@ public class VendedorServico {
 		
 	}
 
-	private void updateData(Vendedor entity, Vendedor obj) {
-		entity.setNome(obj.getNome());
-		entity.setSexo(obj.getSexo());
-		entity.setDataNascimento(obj.getDataNascimento());
-		entity.setLogin(obj.getLogin());
-		entity.setSenha(obj.getSenha());
-		entity.setEmail(obj.getEmail());
-		entity.setAdmin(obj.getAdmin());
-		
+	private void updateData(Phone entity, Phone obj) {
+		entity.setDdd(obj.getDdd());
+		entity.setNumber(obj.getNumber());
 		
 	}
 }

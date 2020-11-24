@@ -7,45 +7,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aguaja.api.domain.Estoque;
-import com.aguaja.api.domain.ItemVendido;
-import com.aguaja.api.domain.Produto;
-import com.aguaja.api.domain.Venda;
-import com.aguaja.api.domain.enums.VendaStatus;
-
-import com.aguaja.api.repositories.EstoqueRepositorio;
-import com.aguaja.api.repositories.ItemVendidoRepositorio;
-import com.aguaja.api.repositories.ProdutoRepositorio;
-import com.aguaja.api.repositories.VendaRepositorio;
+import com.aguaja.api.domain.Order;
+import com.aguaja.api.domain.OrderItem;
+import com.aguaja.api.domain.Product;
+import com.aguaja.api.domain.Stock;
+import com.aguaja.api.domain.enums.OrderStatus;
+import com.aguaja.api.repositories.OrderItemRepository;
+import com.aguaja.api.repositories.OrderRepository;
+import com.aguaja.api.repositories.ProductRepository;
+import com.aguaja.api.repositories.StockRepository;
 
 @RestController
 @RequestMapping("/")
 public class HomeController {
 
 	@Autowired
-	EstoqueRepositorio estoques;
+	StockRepository stocks;
 	@Autowired
-	ItemVendidoRepositorio items;
+	OrderItemRepository items;
 	@Autowired
-	VendaRepositorio vendas;
+	OrderRepository vendas;
 	@Autowired
-	ProdutoRepositorio produtos;
+	ProductRepository products;
 
 	@GetMapping("")
-	public Venda welcome() {
-		Produto produto = new Produto(null, "Agua da gente", 20.00, "Qualidade da bao terra");
-		produtos.save(produto);
+	public Order welcome() {
+		Product product = new Product(null, "Agua da gente", 20.00, "Qualidade da bao terra");
+		products.save(product);
 		
-		Estoque estoque = new Estoque(null, produto, 1, Instant.parse("2019-06-20T19:53:07Z"), 20.00, 25.00);
-		estoques.save(estoque);
+		Stock stock = new Stock(null, product, 1, Instant.parse("2019-06-20T19:53:07Z"), 20.00, 25.00);
+		stocks.save(stock);
 		
-		Venda venda = new Venda(null, Instant.parse("2020-06-20T19:53:07Z"), 20.00, 25.00, 30.00,
-				VendaStatus.EM_ABERTO);
-		ItemVendido item = new ItemVendido(venda, estoque, 3);
+		Order order = new Order(null, Instant.parse("2020-06-20T19:53:07Z"), 20.00, 25.00, 30.00,
+				OrderStatus.OPEN);
+		OrderItem item = new OrderItem(order, stock, 3);
 
-		venda.getItems().add(item);
-		vendas.save(venda);
+		order.getItems().add(item);
+		vendas.save(order);
 
-		return venda;
+		return order;
 	}
 }

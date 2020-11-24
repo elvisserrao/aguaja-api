@@ -26,7 +26,7 @@ public class Order implements Serializable{
 	private Integer id;
 	private Instant date;
 	private Double price;
-	private Double desconto;
+	private Double discount;
 	private Double priceTotal;
 	private Integer orderStatus;
 
@@ -45,12 +45,12 @@ public class Order implements Serializable{
 		super();
 	}
 
-	public Order(Integer id, Instant date, Double price, Double desconto, Double priceTotal, OrderStatus orderstatus) {
+	public Order(Integer id, Instant date, Double price, Double discount, Double priceTotal, OrderStatus orderstatus) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.price = price;
-		this.desconto = desconto;
+		this.discount = discount;
 		this.priceTotal = priceTotal;
 	}
 
@@ -75,11 +75,11 @@ public class Order implements Serializable{
 		this.price = price;
 	}
 
-	public Double getDesconto() {
-		return desconto;
+	public Double getDiscount() {
+		return discount;
 	}
-	public void setDesconto(Double desconto) {
-		this.desconto = desconto;
+	public void setDiscount(Double discount) {
+		this.discount = discount;
 	}
 
 	public Double getPriceTotal() {
