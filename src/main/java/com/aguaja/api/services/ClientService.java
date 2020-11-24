@@ -9,26 +9,26 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.aguaja.api.domain.Cliente;
-import com.aguaja.api.repositories.ClienteRepositorio;
+import com.aguaja.api.domain.Client;
+import com.aguaja.api.repositories.ClientRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class ClienteServico {
+public class ClientService {
 	@Autowired
-	private ClienteRepositorio repository;
+	private ClientRepository repository;
 
-	public List<Cliente> findAll() {
+	public List<Client> findAll() {
 		return repository.findAll();
 	}
 
-	public Cliente findById(Long id) {
-		Optional<Cliente> obj = repository.findById(id);
+	public Client findById(Long id) {
+		Optional<Client> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Cliente insert(Cliente obj) {
+	public Client insert(Client obj) {
 		repository.save(obj);
 		return obj;
 	}
@@ -44,10 +44,10 @@ public class ClienteServico {
 
 	}
 	
-	public Cliente update(Long id, Cliente obj) {
+	public Client update(Long id, Client obj) {
 
 		try {
-			Cliente entity = repository.getOne(id);
+			Client entity = repository.getOne(id);
 			updateData(entity, obj);
 			return repository.save(entity);
 		} catch (EntityNotFoundException e) {
@@ -56,12 +56,12 @@ public class ClienteServico {
 
 	}
 	
-	private void updateData(Cliente entity, Cliente obj) {
-		entity.setNome(obj.getNome());
-		entity.setSexo(obj.getSexo());
+	private void updateData(Client entity, Client obj) {
+		entity.setName(obj.getName());
+		entity.setGender(obj.getGender());
 		entity.setEmail(obj.getEmail());
-		entity.setDataNascimento(obj.getDataNascimento());
+		entity.setBirthDate(obj.getBirthDate());
 		entity.setLogin(obj.getLogin());
-		entity.setSenha(obj.getSenha());
+		entity.setPassword(obj.getPassword());
 	}
 }
