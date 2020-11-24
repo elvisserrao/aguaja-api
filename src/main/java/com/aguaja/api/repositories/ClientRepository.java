@@ -2,7 +2,9 @@ package com.aguaja.api.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import ch.qos.logback.core.net.server.Client;
+import com.aguaja.api.domain.Client;
+
+
 
 public interface ClientRepository extends JpaRepository<Client, Long>{
 
