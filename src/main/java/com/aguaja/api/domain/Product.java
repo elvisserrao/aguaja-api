@@ -14,31 +14,31 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_produto")
-public class Produto implements Serializable {
+@Table(name = "tb_product")
+public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
-	private Double litros;
-	private String descricao;
+	private String name;
+	private Double liters;
+	private String description;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "produto")
-	private List<Estoque> estoques = new ArrayList<>();
+	@OneToMany(mappedBy = "product")
+	private List<Stock> stocks = new ArrayList<>();
 
-	public Produto() {
+	public Product() {
 		super();
 	}
 
-	public Produto(Integer id, String nome, Double litros, String descricao) {
+	public Product(Integer id, String name, Double liters, String description) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.litros = litros;
-		this.descricao = descricao;
+		this.name = name;
+		this.liters = liters;
+		this.description = description;
 	}
 
 	public Integer getId() {
@@ -48,29 +48,29 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Double getLitros() {
-		return litros;
-	}
-	public void setLitros(Double litros) {
-		this.litros = litros;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public Double getLiters() {
+		return liters;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setLiters(Double liters) {
+		this.liters = liters;
 	}
 
-	public List<Estoque> getEstoques() {
-		return estoques;
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<Stock> getStocks() {
+		return stocks;
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class Produto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
+		Product other = (Product) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

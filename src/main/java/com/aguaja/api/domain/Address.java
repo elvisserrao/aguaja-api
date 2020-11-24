@@ -13,33 +13,33 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_endereco")
-public class Endereco implements Serializable{
+@Table(name = "tb_address")
+public class Address implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String logradouro;
-	private String bairro;
-	private Integer numero;
-	private String complemento;
+	private String street;
+	private String neighborhood;
+	private Integer number;
+	private String complement;
 
 	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="cliente_id")
-	private Cliente cliente;
+	@JoinColumn(name="client_id")
+	private Client client;
 
-	public Endereco() {
+	public Address() {
 		super();
 	}
 
-	public Endereco(Integer id, String logradouro, String bairro, Integer numero, String complemento) {
+	public Address(Integer id, String street, String neighborhood, Integer number, String complement) {
 		this.id = id;
-		this.logradouro = logradouro;
-		this.bairro = bairro;
-		this.numero = numero;
-		this.complemento = complemento;
+		this.street = street;
+		this.neighborhood = neighborhood;
+		this.number = number;
+		this.complement = complement;
 	}
 	
 	public Integer getId() {
@@ -49,39 +49,39 @@ public class Endereco implements Serializable{
 		this.id = id;
 	}
 
-	public String getLogradouro() {
-		return logradouro;
+	public String getStreet() {
+		return street;
 	}
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
-	public Integer getNumero() {
-		return numero;
+	public String getNeighborhood() {
+		return neighborhood;
 	}
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
+	public void setNeighborhood(String neighborhood) {
+		this.neighborhood = neighborhood;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Integer getNumber() {
+		return number;
 	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+
+	public String getComplement() {
+		return complement;
+	}
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class Endereco implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Endereco other = (Endereco) obj;
+		Address other = (Address) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
