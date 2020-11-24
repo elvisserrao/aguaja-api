@@ -10,26 +10,26 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.aguaja.api.domain.Estoque;
-import com.aguaja.api.repositories.EstoqueRepositorio;
+import com.aguaja.api.domain.Product;
+import com.aguaja.api.repositories.ProductRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class EstoqueServico {
+public class ProductServico {
 	@Autowired
-	private EstoqueRepositorio repository;
+	private ProductRepository repository;
 	
-	public List<Estoque> findAll(){
+	public List<Product> findAll(){
 		return repository.findAll();
 	}
 	
-	public Estoque findById(Long id) {
-		Optional<Estoque> obj = repository.findById(id);
+	public Product findById(Long id) {
+		Optional<Product> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Estoque insert(Estoque obj) {
+	public Product insert(Product obj) {
 		repository.save(obj);
 		return obj;
 	}
@@ -45,10 +45,10 @@ public class EstoqueServico {
 		
 	}
 	
-	public Estoque update(Long id, Estoque obj) {
+	public Product update(Long id, Product obj) {
 		
 		try {			
-			Estoque entity = repository.getOne(id);
+			Product entity = repository.getOne(id);
 			updateData(entity, obj);
 			return repository.save(entity);
 		}
@@ -58,10 +58,9 @@ public class EstoqueServico {
 		
 	}
 
-	private void updateData(Estoque entity, Estoque obj) {
-		entity.setQuantidade(obj.getQuantidade());
-		entity.setData_entrada(obj.getData_entrada());
-		entity.setPreco_custo(obj.getPreco_custo());
-		entity.setPreco_venda(obj.getPreco_venda());
+	private void updateData(Product entity, Product obj) {
+		entity.setName(obj.getName());
+		entity.setLiters(obj.getLiters());
+		entity.setDescription(obj.getDescription());
 	}
 }

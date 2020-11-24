@@ -10,26 +10,26 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.aguaja.api.domain.Endereco;
-import com.aguaja.api.repositories.EnderecoRepositorio;
+import com.aguaja.api.domain.Address;
+import com.aguaja.api.repositories.AddressRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class EnderecoServico {
+public class AddressService {
 	@Autowired
-	private EnderecoRepositorio repository;
+	private AddressRepository repository;
 	
-	public List<Endereco> findAll(){
+	public List<Address> findAll(){
 		return repository.findAll();
 	}
 	
-	public Endereco findById(Long id) {
-		Optional<Endereco> obj = repository.findById(id);
+	public Address findById(Long id) {
+		Optional<Address> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Endereco insert(Endereco obj) {
+	public Address insert(Address obj) {
 		repository.save(obj);
 		return obj;
 	}
@@ -45,10 +45,10 @@ public class EnderecoServico {
 		
 	}
 	
-	public Endereco update(Long id, Endereco obj) {
+	public Address update(Long id, Address obj) {
 		
 		try {			
-			Endereco entity = repository.getOne(id);
+			Address entity = repository.getOne(id);
 			updateData(entity, obj);
 			return repository.save(entity);
 		}
@@ -58,10 +58,10 @@ public class EnderecoServico {
 		
 	}
 
-	private void updateData(Endereco entity, Endereco obj) {
-		entity.setLogradouro(obj.getLogradouro());
-		entity.setBairro(obj.getBairro());
-		entity.setNumero(obj.getNumero());
-		entity.setComplemento(obj.getComplemento());
+	private void updateData(Address entity, Address obj) {
+		entity.setStreet(obj.getStreet());
+		entity.setNeighborhood(obj.getNeighborhood());
+		entity.setNumber(obj.getNumber());
+		entity.setComplement(obj.getComplement());
 	}
 }

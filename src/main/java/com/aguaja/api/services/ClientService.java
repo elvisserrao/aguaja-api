@@ -1,5 +1,4 @@
 package com.aguaja.api.services;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -10,26 +9,26 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.aguaja.api.domain.Telefone;
-import com.aguaja.api.repositories.TelefoneRepositorio;
+import com.aguaja.api.domain.Client;
+import com.aguaja.api.repositories.ClientRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class TelefoneServico {
+public class ClientService {
 	@Autowired
-	private TelefoneRepositorio repository;
-	
-	public List<Telefone> findAll(){
+	private ClientRepository repository;
+
+	public List<Client> findAll() {
 		return repository.findAll();
 	}
-	
-	public Telefone findById(Long id) {
-		Optional<Telefone> obj = repository.findById(id);
+
+	public Client findById(Long id) {
+		Optional<Client> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Telefone insert(Telefone obj) {
+	public Client insert(Client obj) {
 		repository.save(obj);
 		return obj;
 	}
@@ -37,30 +36,32 @@ public class TelefoneServico {
 	public void delete(Long id) {
 		try {
 			repository.deleteById(id);
-		}catch(EmptyResultDataAccessException e) {
+		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
-		}catch(DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
-		
+
 	}
 	
-	public Telefone update(Long id, Telefone obj) {
-		
-		try {			
-			Telefone entity = repository.getOne(id);
+	public Client update(Long id, Client obj) {
+
+		try {
+			Client entity = repository.getOne(id);
 			updateData(entity, obj);
 			return repository.save(entity);
-		}
-		catch(EntityNotFoundException e) {
+		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
-		
-	}
 
-	private void updateData(Telefone entity, Telefone obj) {
-		entity.setDdd(obj.getDdd());
-		entity.setNumero(obj.getNumero());
-		
+	}
+	
+	private void updateData(Client entity, Client obj) {
+		entity.setName(obj.getName());
+		entity.setGender(obj.getGender());
+		entity.setEmail(obj.getEmail());
+		entity.setBirthDate(obj.getBirthDate());
+		entity.setLogin(obj.getLogin());
+		entity.setPassword(obj.getPassword());
 	}
 }
