@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.aguaja.api.domain.Address;
 
-public interface EnderecoRepositorio extends JpaRepository<Address, Long>{
+public interface AddressRepository extends JpaRepository<Address, Long>{
 
 }

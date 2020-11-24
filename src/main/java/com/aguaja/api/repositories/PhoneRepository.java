@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.aguaja.api.domain.Phone;
 
-public interface TelefoneRepositorio extends JpaRepository<Phone, Long>{
+public interface PhoneRepository extends JpaRepository<Phone, Long>{
 
 }

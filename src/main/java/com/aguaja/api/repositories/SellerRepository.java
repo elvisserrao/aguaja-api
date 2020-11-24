@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.aguaja.api.domain.Seller;
 
-public interface VendedorRepositorio extends JpaRepository<Seller, Long>{
+public interface SellerRepository extends JpaRepository<Seller, Long>{
 
 }

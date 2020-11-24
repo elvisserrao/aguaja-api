@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.aguaja.api.domain.Order;
 
-public interface VendaRepositorio extends JpaRepository<Order, Long>{
+public interface OrderRepository extends JpaRepository<Order, Long>{
 
 }

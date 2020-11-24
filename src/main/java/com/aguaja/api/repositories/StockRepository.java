@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.aguaja.api.domain.Stock;
 
-public interface EstoqueRepositorio extends JpaRepository<Stock, Long>{
+public interface StockRepository extends JpaRepository<Stock, Long>{
 
 }
