@@ -28,6 +28,7 @@ public class Client implements Serializable{
 	private Instant birthDate;
 	private String login;
 	private String password;
+	private Boolean admin;
 
 	@OneToOne
 	@JoinColumn(name="phone_id")
@@ -43,7 +44,7 @@ public class Client implements Serializable{
 	public Client() {
 	}
 
-	public Client(Integer id, String name, Integer gender, String email, Instant birthDate, String login, String password) {
+	public Client(Integer id, String name, Integer gender, String email, Instant birthDate, String login, String password, Boolean admin) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
@@ -51,6 +52,7 @@ public class Client implements Serializable{
 		this.birthDate = birthDate;
 		this.login = login;
 		this.password = password;
+		this.admin = admin;
 	}
 
 	public Integer getId() {
@@ -101,6 +103,14 @@ public class Client implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public Boolean getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
 
 	public Phone getPhone() {
 		return phone;
@@ -144,4 +154,6 @@ public class Client implements Serializable{
 			return false;
 		return true;
 	}
+
+	
 }
