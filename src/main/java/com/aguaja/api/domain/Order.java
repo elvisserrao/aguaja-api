@@ -45,13 +45,14 @@ public class Order implements Serializable{
 		super();
 	}
 
-	public Order(Integer id, Instant date, Double price, Double discount, Double priceTotal, OrderStatus orderstatus) {
-		super();
+	public Order(Integer id, Instant date, Double price, Double discount, Double priceTotal, OrderStatus orderstatus, Seller seller, Client client) {
 		this.id = id;
 		this.date = date;
 		this.price = price;
 		this.discount = discount;
 		this.priceTotal = priceTotal;
+		this.seller = seller;
+		this.client = client;
 	}
 
 	public Integer getId() {
