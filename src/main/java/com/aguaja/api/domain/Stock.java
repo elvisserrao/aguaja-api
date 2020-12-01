@@ -44,14 +44,14 @@ public class Stock implements Serializable{
 		super();
 	}
 
-	public Stock(Integer id, Product product, Integer quantity, Instant entryDate, Double costPrice, Double costSell) {
-		super();
+	public Stock(Integer id, Product product, Integer quantity, Instant entryDate, Double costPrice, Double costSell, Seller seller) {
 		this.id = id;
 		this.product = product;
 		this.quantity = quantity;
 		this.entryDate = entryDate;
 		this.costPrice = costPrice;
 		this.costSell = costSell;
+		this.seller = seller;
 	}
 
 	public Integer getId() {

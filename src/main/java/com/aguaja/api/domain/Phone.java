@@ -2,12 +2,19 @@ package com.aguaja.api.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Any;
+import org.hibernate.annotations.AnyMetaDef;
+import org.hibernate.annotations.MetaValue;
+
+import com.aguaja.api.domain.interfaces.HasPhone;
 
 @Entity
 @Table(name = "tb_phone")
@@ -19,12 +26,13 @@ public class Phone implements Serializable{
 	private Integer id;
 	private String ddd;
 	private String number;
-
-	@OneToOne(mappedBy = "phone")
-	private Client client;
-
-	@OneToOne(mappedBy = "phone")
-	private Seller seller;
+	
+	@Any(metaColumn = @Column(name = "user_type"))
+	@AnyMetaDef(idType = "integer", metaType = "string", metaValues = {
+	@MetaValue(value = "1", targetEntity = Client.class),
+	@MetaValue(value = "2", targetEntity = Seller.class) })
+	@JoinColumn(name = "user_id")
+	private HasPhone hasphone;
 
 	public Phone() {
 		super();
@@ -58,18 +66,14 @@ public class Phone implements Serializable{
 		this.number = number;
 	}
 
-	public Client getClient() {
-		return client;
-	}
-	public void setClient(Client client) {
-		this.client = client;
+	
+
+	public HasPhone getHasphone() {
+		return hasphone;
 	}
 
-	public Seller getSeller() {
-		return seller;
-	}
-	public void setSeller(Seller seller) {
-		this.seller = seller;
+	public void setHasphone(HasPhone hasphone) {
+		this.hasphone = hasphone;
 	}
 
 	@Override
