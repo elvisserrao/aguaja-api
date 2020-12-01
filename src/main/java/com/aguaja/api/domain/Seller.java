@@ -14,9 +14,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.aguaja.api.domain.interfaces.HasPhone;
+
 @Entity
 @Table(name = "tb_seller")
-public class Seller implements Serializable{
+public class Seller implements Serializable, HasPhone{
 	private static final long serialVersionUID = 1L;
 
 	@Id
