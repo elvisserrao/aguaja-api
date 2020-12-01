@@ -27,11 +27,11 @@ public class Phone implements Serializable{
 	private String ddd;
 	private String number;
 	
-	@Any(metaColumn = @Column(name = "detail_type"))
+	@Any(metaColumn = @Column(name = "user_type"))
 	@AnyMetaDef(idType = "integer", metaType = "string", metaValues = {
 	@MetaValue(value = "1", targetEntity = Client.class),
 	@MetaValue(value = "2", targetEntity = Seller.class) })
-	@JoinColumn(name = "detail_id")
+	@JoinColumn(name = "user_id")
 	private HasPhone hasphone;
 
 	public Phone() {
