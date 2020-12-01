@@ -10,26 +10,26 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.aguaja.api.domain.Phone;
-import com.aguaja.api.repositories.PhoneRepository;
+import com.aguaja.api.domain.Order;
+import com.aguaja.api.repositories.OrderRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class PhoneServico {
+public class OrderService {
 	@Autowired
-	private PhoneRepository repository;
+	private OrderRepository repository;
 	
-	public List<Phone> findAll(){
+	public List<Order> findAll(){
 		return repository.findAll();
 	}
 	
-	public Phone findById(Long id) {
-		Optional<Phone> obj = repository.findById(id);
+	public Order findById(Long id) {
+		Optional<Order> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Phone insert(Phone obj) {
+	public Order insert(Order obj) {
 		repository.save(obj);
 		return obj;
 	}
@@ -45,10 +45,10 @@ public class PhoneServico {
 		
 	}
 	
-	public Phone update(Long id, Phone obj) {
+	public Order update(Long id, Order obj) {
 		
 		try {			
-			Phone entity = repository.getOne(id);
+			Order entity = repository.getOne(id);
 			updateData(entity, obj);
 			return repository.save(entity);
 		}
@@ -58,9 +58,11 @@ public class PhoneServico {
 		
 	}
 
-	private void updateData(Phone entity, Phone obj) {
-		entity.setDdd(obj.getDdd());
-		entity.setNumber(obj.getNumber());
+	private void updateData(Order entity, Order obj) {
+		entity.setDate(obj.getDate());
+		entity.setPrice(obj.getPrice());
+		entity.setDiscount(obj.getDiscount());
+		entity.setPriceTotal(obj.getPriceTotal());
 		
 	}
 }

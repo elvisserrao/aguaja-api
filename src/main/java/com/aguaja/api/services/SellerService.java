@@ -10,26 +10,26 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.aguaja.api.domain.Order;
-import com.aguaja.api.repositories.OrderRepository;
+import com.aguaja.api.domain.Seller;
+import com.aguaja.api.repositories.SellerRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class OrderServico {
+public class SellerService {
 	@Autowired
-	private OrderRepository repository;
+	private SellerRepository repository;
 	
-	public List<Order> findAll(){
+	public List<Seller> findAll(){
 		return repository.findAll();
 	}
 	
-	public Order findById(Long id) {
-		Optional<Order> obj = repository.findById(id);
+	public Seller findById(Long id) {
+		Optional<Seller> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Order insert(Order obj) {
+	public Seller insert(Seller obj) {
 		repository.save(obj);
 		return obj;
 	}
@@ -45,10 +45,10 @@ public class OrderServico {
 		
 	}
 	
-	public Order update(Long id, Order obj) {
+	public Seller update(Long id, Seller obj) {
 		
 		try {			
-			Order entity = repository.getOne(id);
+			Seller entity = repository.getOne(id);
 			updateData(entity, obj);
 			return repository.save(entity);
 		}
@@ -58,11 +58,15 @@ public class OrderServico {
 		
 	}
 
-	private void updateData(Order entity, Order obj) {
-		entity.setDate(obj.getDate());
-		entity.setPrice(obj.getPrice());
-		entity.setDiscount(obj.getDiscount());
-		entity.setPriceTotal(obj.getPriceTotal());
+	private void updateData(Seller entity, Seller obj) {
+		entity.setName(obj.getName());
+		entity.setGender(obj.getGender());
+		entity.setBirthDate(obj.getBirthDate());
+		entity.setLogin(obj.getLogin());
+		entity.setPassword(obj.getPassword());
+		entity.setEmail(obj.getEmail());
+		entity.setAdmin(obj.getAdmin());
+		
 		
 	}
 }

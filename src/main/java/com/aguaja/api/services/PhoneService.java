@@ -10,26 +10,26 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.aguaja.api.domain.Seller;
-import com.aguaja.api.repositories.SellerRepository;
+import com.aguaja.api.domain.Phone;
+import com.aguaja.api.repositories.PhoneRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class SellerServico {
+public class PhoneService {
 	@Autowired
-	private SellerRepository repository;
+	private PhoneRepository repository;
 	
-	public List<Seller> findAll(){
+	public List<Phone> findAll(){
 		return repository.findAll();
 	}
 	
-	public Seller findById(Long id) {
-		Optional<Seller> obj = repository.findById(id);
+	public Phone findById(Long id) {
+		Optional<Phone> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Seller insert(Seller obj) {
+	public Phone insert(Phone obj) {
 		repository.save(obj);
 		return obj;
 	}
@@ -45,10 +45,10 @@ public class SellerServico {
 		
 	}
 	
-	public Seller update(Long id, Seller obj) {
+	public Phone update(Long id, Phone obj) {
 		
 		try {			
-			Seller entity = repository.getOne(id);
+			Phone entity = repository.getOne(id);
 			updateData(entity, obj);
 			return repository.save(entity);
 		}
@@ -58,15 +58,9 @@ public class SellerServico {
 		
 	}
 
-	private void updateData(Seller entity, Seller obj) {
-		entity.setName(obj.getName());
-		entity.setGender(obj.getGender());
-		entity.setBirthDate(obj.getBirthDate());
-		entity.setLogin(obj.getLogin());
-		entity.setPassword(obj.getPassword());
-		entity.setEmail(obj.getEmail());
-		entity.setAdmin(obj.getAdmin());
-		
+	private void updateData(Phone entity, Phone obj) {
+		entity.setDdd(obj.getDdd());
+		entity.setNumber(obj.getNumber());
 		
 	}
 }
