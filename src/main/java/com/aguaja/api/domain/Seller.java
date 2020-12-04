@@ -27,7 +27,7 @@ public class Seller implements Serializable, HasPhone{
 	private String name;
 	private Integer gender;
 	private Instant birthDate;
-	private String login;
+	private String username;
 	private String password;
 	private String email;
 	private Integer admin;
@@ -47,14 +47,14 @@ public class Seller implements Serializable, HasPhone{
 		super();
 	}
 
-	public Seller(Integer id, String name, Integer gender, Instant birthDate, String login, String password,
+	public Seller(Integer id, String name, Integer gender, Instant birthDate, String username, String password,
 			String email, Integer admin) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.birthDate = birthDate;
-		this.login = login;
+		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.admin = admin;
@@ -88,11 +88,11 @@ public class Seller implements Serializable, HasPhone{
 		this.birthDate = birthDate;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
