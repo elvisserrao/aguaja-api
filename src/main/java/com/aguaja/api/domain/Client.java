@@ -28,7 +28,7 @@ public class Client implements Serializable, HasPhone{
 	private Integer gender;
 	private String email;
 	private Instant birthDate;
-	private String login;
+	private String username;
 	private String password;
 	private Boolean admin;
 
@@ -46,13 +46,18 @@ public class Client implements Serializable, HasPhone{
 	public Client() {
 	}
 
-	public Client(Integer id, String name, Integer gender, String email, Instant birthDate, String login, String password, Boolean admin) {
+	public Client(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+
+	public Client(Integer id, String name, Integer gender, String email, Instant birthDate, String username, String password, Boolean admin) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.email = email;
 		this.birthDate = birthDate;
-		this.login = login;
+		this.username = username;
 		this.password = password;
 		this.admin = admin;
 	}
@@ -92,11 +97,11 @@ public class Client implements Serializable, HasPhone{
 		this.birthDate = birthDate;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

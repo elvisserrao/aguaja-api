@@ -62,7 +62,7 @@ public class SellerServico {
 		entity.setName(obj.getName());
 		entity.setGender(obj.getGender());
 		entity.setBirthDate(obj.getBirthDate());
-		entity.setLogin(obj.getLogin());
+		entity.setUsername(obj.getUsername());
 		entity.setPassword(obj.getPassword());
 		entity.setEmail(obj.getEmail());
 		entity.setAdmin(obj.getAdmin());
