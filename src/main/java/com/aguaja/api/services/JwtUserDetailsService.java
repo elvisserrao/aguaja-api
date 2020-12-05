@@ -1,6 +1,5 @@
 package com.aguaja.api.services;
 
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,14 +32,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 			Client client = clientRepository.findByUsername(username)
 					.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-			return new org.springframework.security.core.userdetails.User(client.getUsername(), client.getPassword(),
-					new ArrayList<>());
+			return JwtUserDetails.build(client);
 		} else {
 			Seller seller = sellerRepository.findByUsername(username)
 					.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-			return new org.springframework.security.core.userdetails.User(seller.getUsername(), seller.getPassword(),
-					new ArrayList<>());
+			return JwtUserDetails.build(seller);
 		}
 
 	}
