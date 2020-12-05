@@ -24,7 +24,7 @@ const App = () => {
   }, []);
 
   const logOut = () => {
-    " AuthService.logout();";
+    AuthService.logout();
   };
 
   return (
