@@ -23,7 +23,7 @@ public class Client implements Serializable, HasPhone{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String name;
 	private Integer gender;
 	private String email;
@@ -46,12 +46,7 @@ public class Client implements Serializable, HasPhone{
 	public Client() {
 	}
 
-	public Client(String username, String password) {
-		this.username = username;
-		this.password = password;
-	}
-
-	public Client(Integer id, String name, Integer gender, String email, Instant birthDate, String username, String password, Boolean admin) {
+  public Client(Long id, String name, Integer gender, String email, Instant birthDate, String login, String password, Boolean admin) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
@@ -62,10 +57,10 @@ public class Client implements Serializable, HasPhone{
 		this.admin = admin;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
