@@ -75,6 +75,7 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
   const [name, setName] = useState("");
+  const [perfil, setPerfil] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -103,6 +104,11 @@ const Register = (props) => {
     setName(name);
   };
 
+  const onChangePerfil = (e) => {
+    const perfil = e.target.value;
+    setPerfil(perfil);
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -120,23 +126,41 @@ const Register = (props) => {
         password,
       };
 
-      AuthService.clientRegister(data).then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(true);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+      perfil === "client"
+        ? AuthService.clientRegister(data).then(
+            (response) => {
+              setMessage(response.data.message);
+              setSuccessful(true);
+            },
+            (error) => {
+              const resMessage =
+                (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+                error.message ||
+                error.toString();
 
-          setMessage(resMessage);
-          setSuccessful(false);
-        }
-      );
+              setMessage(resMessage);
+              setSuccessful(false);
+            }
+          )
+        : AuthService.sellerRegister(data).then(
+            (response) => {
+              setMessage(response.data.message);
+              setSuccessful(true);
+            },
+            (error) => {
+              const resMessage =
+                (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+              setMessage(resMessage);
+              setSuccessful(false);
+            }
+          );
     }
   };
 
@@ -210,6 +234,16 @@ const Register = (props) => {
                   validations={[required, vpassword]}
                 />
               </div>
+
+              <select
+                value={perfil}
+                onChange={onChangePerfil}
+                name="perfil"
+                className="form-control"
+              >
+                <option value="seller">Vendedor</option>
+                <option value="client">Cliente</option>
+              </select>
 
               <div className="form-group">
                 <button className="btn btn-primary btn-block">Sign Up</button>
