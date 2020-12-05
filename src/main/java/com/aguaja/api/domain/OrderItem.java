@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.aguaja.api.domain.pk.OrderItemPK;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

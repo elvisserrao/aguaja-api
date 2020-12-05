@@ -61,7 +61,7 @@ public class ClientService {
 		entity.setGender(obj.getGender());
 		entity.setEmail(obj.getEmail());
 		entity.setBirthDate(obj.getBirthDate());
-		entity.setLogin(obj.getLogin());
+		entity.setUsername(obj.getUsername());
 		entity.setPassword(obj.getPassword());
 	}
 }

@@ -1,10 +1,13 @@
-package com.aguaja.api.domain;
+package com.aguaja.api.domain.pk;
 
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.aguaja.api.domain.Order;
+import com.aguaja.api.domain.Stock;
 
 @Embeddable
 public class OrderItemPK implements Serializable{
