@@ -46,7 +46,7 @@ public class Client implements Serializable, HasPhone{
 	public Client() {
 	}
 
-  public Client(Long id, String name, Integer gender, String email, Instant birthDate, String login, String password, Boolean admin) {
+  public Client(Long id, String name, Integer gender, String email, Instant birthDate, String username, String password, Boolean admin) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;

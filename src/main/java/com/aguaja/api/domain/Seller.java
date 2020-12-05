@@ -23,14 +23,14 @@ public class Seller implements Serializable, HasPhone{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String name;
 	private Integer gender;
 	private Instant birthDate;
 	private String username;
 	private String password;
 	private String email;
-	private Integer admin;
+	private Boolean admin;
 
 	@OneToOne
 	@JoinColumn(name="phone_id")
@@ -47,8 +47,8 @@ public class Seller implements Serializable, HasPhone{
 		super();
 	}
 
-	public Seller(Integer id, String name, Integer gender, Instant birthDate, String username, String password,
-			String email, Integer admin) {
+	public Seller(Long id, String name, Integer gender, Instant birthDate, String username, String password,
+			String email, Boolean admin) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -60,10 +60,10 @@ public class Seller implements Serializable, HasPhone{
 		this.admin = admin;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -109,10 +109,10 @@ public class Seller implements Serializable, HasPhone{
 		this.email = email;
 	}
 
-	public Integer getAdmin() {
+	public Boolean getAdmin() {
 		return admin;
 	}
-	public void setAdmin(Integer admin) {
+	public void setAdmin(Boolean admin) {
 		this.admin = admin;
 	}
 
