@@ -18,14 +18,14 @@ import com.aguaja.api.domain.interfaces.HasPhone;
 
 @Entity
 @Table(name = "tb_client")
-public class Client implements Serializable, HasPhone{
+public class Client implements Serializable, HasPhone {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private Integer gender;
+	private Character gender;
 	private String email;
 	private Instant birthDate;
 	private String username;
@@ -33,11 +33,11 @@ public class Client implements Serializable, HasPhone{
 	private Boolean admin;
 
 	@OneToOne
-	@JoinColumn(name="phone_id")
+	@JoinColumn(name = "phone_id")
 	private Phone phone;
 
 	@OneToOne
-	@JoinColumn(name="address_id")
+	@JoinColumn(name = "address_id")
 	private Address address;
 
 	@OneToMany(mappedBy = "client")
@@ -46,7 +46,8 @@ public class Client implements Serializable, HasPhone{
 	public Client() {
 	}
 
-  public Client(Long id, String name, Integer gender, String email, Instant birthDate, String username, String password, Boolean admin) {
+	public Client(Long id, String name, Character gender, String email, Instant birthDate, String username,
+			String password, Boolean admin) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
@@ -60,6 +61,7 @@ public class Client implements Serializable, HasPhone{
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -67,20 +69,23 @@ public class Client implements Serializable, HasPhone{
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public Integer getGender() {
+	public Character getGender() {
 		return gender;
 	}
-	public void setGender(Integer gender) {
+
+	public void setGender(Character gender) {
 		this.gender = gender;
 	}
 
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -88,6 +93,7 @@ public class Client implements Serializable, HasPhone{
 	public Instant getBirthDate() {
 		return birthDate;
 	}
+
 	public void setBirthDate(Instant birthDate) {
 		this.birthDate = birthDate;
 	}
@@ -95,6 +101,7 @@ public class Client implements Serializable, HasPhone{
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -102,10 +109,11 @@ public class Client implements Serializable, HasPhone{
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public Boolean getAdmin() {
 		return admin;
 	}
@@ -117,6 +125,7 @@ public class Client implements Serializable, HasPhone{
 	public Phone getPhone() {
 		return phone;
 	}
+
 	public void setPhone(Phone phone) {
 		this.phone = phone;
 	}
@@ -124,6 +133,7 @@ public class Client implements Serializable, HasPhone{
 	public Address getAddress() {
 		return address;
 	}
+
 	public void setAddress(Address address) {
 		this.address = address;
 	}
@@ -157,5 +167,4 @@ public class Client implements Serializable, HasPhone{
 		return true;
 	}
 
-	
 }
