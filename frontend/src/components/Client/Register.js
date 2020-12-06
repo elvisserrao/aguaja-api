@@ -235,15 +235,18 @@ const Register = (props) => {
                 />
               </div>
 
-              <select
-                value={perfil}
-                onChange={onChangePerfil}
-                name="perfil"
-                className="form-control"
-              >
-                <option value="seller">Vendedor</option>
-                <option value="client">Cliente</option>
-              </select>
+              <div className="form-group">
+                <label htmlFor="perfil">Perfil</label>
+                <select
+                  value={perfil}
+                  onChange={onChangePerfil}
+                  name="perfil"
+                  className="form-control"
+                >
+                  <option value="seller">Vendedor</option>
+                  <option value="client">Cliente</option>
+                </select>
+              </div>
 
               <div className="form-group">
                 <button className="btn btn-primary btn-block">Sign Up</button>
