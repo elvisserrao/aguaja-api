@@ -8,6 +8,9 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Edit from "./components/Edit";
+import AddProduct from "./components/Admin/AddProduct";
+import ProductsList from "./components/Admin/ProductsList";
+import EditProduct from "./components/Admin/EditProduct";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -40,21 +43,23 @@ const App = () => {
               Pagina Inicial
             </Link>
           </li>
+        </div>
 
-          {currentUser && (
+        {currentUser && currentUser.admin && (
+          <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
+              <Link to={"/products"} className="nav-link">
+                Lista de Produtos
               </Link>
             </li>
-          )}
-        </div>
+          </div>
+        )}
 
         {currentUser ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link to={"/profile"} className="nav-link">
-                {currentUser.username}
+                Perfil
               </Link>
             </li>
             <li className="nav-item">
@@ -87,6 +92,9 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/clients/:id" component={Edit} />
+          <Route exact path="/admin/product/new" component={AddProduct} />
+          <Route exact path="/admin/products" component={ProductsList} />
+          <Route exact path="/admin/products/:id" component={EditProduct} />
         </Switch>
       </div>
     </div>
