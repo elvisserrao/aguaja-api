@@ -4,7 +4,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 
-import AuthService from "../../services/auth.service";
+import AuthService from "../services/auth.service";
 
 const required = (value) => {
   if (!value) {
@@ -177,7 +177,7 @@ const Register = (props) => {
           {!successful && (
             <div>
               <div className="form-group">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Nome</label>
                 <Input
                   type="text"
                   className="form-control"
@@ -189,7 +189,7 @@ const Register = (props) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="gender">Gender</label>
+                <label htmlFor="gender">Sexo</label>
                 <Input
                   type="text"
                   className="form-control"
@@ -200,7 +200,7 @@ const Register = (props) => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">Nome de usuário</label>
                 <Input
                   type="text"
                   className="form-control"
@@ -224,7 +224,7 @@ const Register = (props) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Senha</label>
                 <Input
                   type="password"
                   className="form-control"
@@ -249,7 +249,7 @@ const Register = (props) => {
               </div>
 
               <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
+                <button className="btn btn-primary btn-block">Cadastrar</button>
               </div>
             </div>
           )}

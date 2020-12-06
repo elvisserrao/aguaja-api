@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ClientService from "../../services/client.service";
+import ClientService from "../services/client.service";
 
 const Client = (props) => {
   const initialClientState = {
