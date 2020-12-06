@@ -1,6 +1,6 @@
 import http from "./http-common";
 
-const ClientService = {
+const ProductService = {
   getAll: () => {
     return http.get("/product");
   },
@@ -26,4 +26,4 @@ const ClientService = {
   },
 };
 
-export default ClientService;
+export default ProductService;
