@@ -18,26 +18,26 @@ import com.aguaja.api.domain.interfaces.HasPhone;
 
 @Entity
 @Table(name = "tb_seller")
-public class Seller implements Serializable, HasPhone{
+public class Seller implements Serializable, HasPhone {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String name;
-	private Integer gender;
+	private Character gender;
 	private Instant birthDate;
 	private String username;
 	private String password;
 	private String email;
-	private Integer admin;
+	private Boolean admin;
 
 	@OneToOne
-	@JoinColumn(name="phone_id")
+	@JoinColumn(name = "phone_id")
 	private Phone phone;
 
 	@OneToOne
-	@JoinColumn(name="address_id")
+	@JoinColumn(name = "address_id")
 	private Address address;
 
 	@OneToMany(mappedBy = "seller")
@@ -47,8 +47,8 @@ public class Seller implements Serializable, HasPhone{
 		super();
 	}
 
-	public Seller(Integer id, String name, Integer gender, Instant birthDate, String username, String password,
-			String email, Integer admin) {
+	public Seller(Long id, String name, Character gender, String email, Instant birthDate, String username,
+			String password, Boolean admin) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -60,30 +60,34 @@ public class Seller implements Serializable, HasPhone{
 		this.admin = admin;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public Integer getGender() {
+	public Character getGender() {
 		return gender;
 	}
-	public void setGender(Integer gender) {
+
+	public void setGender(Character gender) {
 		this.gender = gender;
 	}
 
 	public Instant getBirthDate() {
 		return birthDate;
 	}
+
 	public void setBirthDate(Instant birthDate) {
 		this.birthDate = birthDate;
 	}
@@ -91,6 +95,7 @@ public class Seller implements Serializable, HasPhone{
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -98,6 +103,7 @@ public class Seller implements Serializable, HasPhone{
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -105,20 +111,23 @@ public class Seller implements Serializable, HasPhone{
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public Integer getAdmin() {
+	public Boolean getAdmin() {
 		return admin;
 	}
-	public void setAdmin(Integer admin) {
+
+	public void setAdmin(Boolean admin) {
 		this.admin = admin;
 	}
 
 	public Phone getPhone() {
 		return phone;
 	}
+
 	public void setPhone(Phone phone) {
 		this.phone = phone;
 	}
@@ -126,6 +135,7 @@ public class Seller implements Serializable, HasPhone{
 	public Address getAddress() {
 		return address;
 	}
+
 	public void setAddress(Address address) {
 		this.address = address;
 	}

@@ -20,9 +20,10 @@ public class Product implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String name;
 	private Double liters;
+	private String urlImage;
 	private String description;
 	
 	@JsonIgnore
@@ -33,18 +34,19 @@ public class Product implements Serializable {
 		super();
 	}
 
-	public Product(Integer id, String name, Double liters, String description) {
+	public Product(Long id, String name, Double liters, String urlImage, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.liters = liters;
+		this.urlImage = urlImage;
 		this.description = description;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -53,6 +55,13 @@ public class Product implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 	public Double getLiters() {

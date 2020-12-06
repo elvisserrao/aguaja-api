@@ -23,7 +23,7 @@ public class Stock implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private Integer quantity;
 	private Instant entryDate;
 	private Double costPrice;
@@ -44,7 +44,7 @@ public class Stock implements Serializable{
 		super();
 	}
 
-	public Stock(Integer id, Product product, Integer quantity, Instant entryDate, Double costPrice, Double costSell, Seller seller) {
+	public Stock(Long id, Product product, Integer quantity, Instant entryDate, Double costPrice, Double costSell, Seller seller) {
 		this.id = id;
 		this.product = product;
 		this.quantity = quantity;
@@ -54,10 +54,10 @@ public class Stock implements Serializable{
 		this.seller = seller;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

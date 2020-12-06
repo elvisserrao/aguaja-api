@@ -3,7 +3,7 @@ import java.time.Instant;
 
 public class ClientDTO {
 	private String name;
-	private Integer gender;
+	private Character gender;
 	private String email;
 	private Phone phone;
 	private Instant birthDate;
@@ -17,10 +17,10 @@ public class ClientDTO {
 		this.name = name;
 	}
 
-	public Integer getGender() {
+	public Character getGender() {
 		return gender;
 	}
-	public void setGender(Integer gender) {
+	public void setGender(Character gender) {
 		this.gender = gender;
 	}
 
