@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.aguaja.api.domain.interfaces.HasAddress;
 import com.aguaja.api.domain.interfaces.HasPhone;
@@ -31,10 +32,10 @@ public class Seller implements Serializable, HasPhone, HasAddress {
 	private String email;
 	private Boolean admin;
 
-	
+	@Transient
 	private Phone phone;
 
-	
+	@Transient
 	private Address address;
 
 	@OneToMany(mappedBy = "seller")
