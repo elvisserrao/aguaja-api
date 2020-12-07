@@ -32,7 +32,7 @@ public class Phone implements Serializable{
 	@MetaValue(value = "1", targetEntity = Client.class),
 	@MetaValue(value = "2", targetEntity = Seller.class) })
 	@JoinColumn(name = "user_id")
-	private HasPhone hasphone;
+	private HasPhone hasPhone;
 
 	public Phone() {
 		super();
@@ -68,12 +68,12 @@ public class Phone implements Serializable{
 
 	
 
-	public HasPhone getHasphone() {
-		return hasphone;
+	public HasPhone getHasPhone() {
+		return hasPhone;
 	}
 
-	public void setHasphone(HasPhone hasphone) {
-		this.hasphone = hasphone;
+	public void setHasPhone(HasPhone hasPhone) {
+		this.hasPhone = hasPhone;
 	}
 
 	@Override
