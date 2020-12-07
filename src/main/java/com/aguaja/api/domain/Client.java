@@ -9,16 +9,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.aguaja.api.domain.interfaces.HasAddress;
 import com.aguaja.api.domain.interfaces.HasPhone;
 
 @Entity
 @Table(name = "tb_client")
-public class Client implements Serializable, HasPhone {
+public class Client implements Serializable, HasPhone, HasAddress{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -32,12 +31,9 @@ public class Client implements Serializable, HasPhone {
 	private String password;
 	private Boolean admin;
 
-	@OneToOne
-	@JoinColumn(name = "phone_id")
+	
 	private Phone phone;
-
-	@OneToOne
-	@JoinColumn(name = "address_id")
+	
 	private Address address;
 
 	@OneToMany(mappedBy = "client")
