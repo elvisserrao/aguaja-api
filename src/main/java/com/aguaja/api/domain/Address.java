@@ -2,15 +2,19 @@ package com.aguaja.api.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Any;
+import org.hibernate.annotations.AnyMetaDef;
+import org.hibernate.annotations.MetaValue;
+
+import com.aguaja.api.domain.interfaces.HasAddress;
 
 @Entity
 @Table(name = "tb_address")
@@ -25,10 +29,12 @@ public class Address implements Serializable{
 	private Integer number;
 	private String complement;
 
-	@JsonIgnore
-	@OneToOne
-	@JoinColumn(name="client_id")
-	private Client client;
+	@Any(metaColumn = @Column(name = "user_type"))
+	@AnyMetaDef(idType = "integer", metaType = "string", metaValues = {
+	@MetaValue(value = "1", targetEntity = Client.class),
+	@MetaValue(value = "2", targetEntity = Seller.class) })
+	@JoinColumn(name = "user_id")
+	private HasAddress hasAddress;
 
 	public Address() {
 		super();
@@ -77,11 +83,12 @@ public class Address implements Serializable{
 		this.complement = complement;
 	}
 
-	public Client getClient() {
-		return client;
+	public HasAddress getHasAddress() {
+		return hasAddress;
 	}
-	public void setClient(Client client) {
-		this.client = client;
+
+	public void setHasAddress(HasAddress hasAddress) {
+		this.hasAddress = hasAddress;
 	}
 
 	@Override
