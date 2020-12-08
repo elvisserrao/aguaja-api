@@ -1,44 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StockService from "../../services/stock.service";
+import ProductService from "../../services/product.service";
+import AuthService from "../../services/auth.service";
 
 const AddStock = () => {
   const initialStockState = {
     id: null,
-    cost_price: 0,
-    cost_sell: 0,
-    entry_date: Date.now(),
-    quantity: 0,
-    product_id: "",
-    seller_id: "",
+    costPrice: "",
+    costSell: "",
+    entryDate: Date.now(),
+    quantity: "",
+    productId: 0,
   };
+  const [products, setProducts] = useState([]);
   const [stock, setStock] = useState(initialStockState);
+  const [sellerId, setSellerId] = useState();
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    retrieveProducts();
+
+    const user = AuthService.getCurrentUser();
+
+    setSellerId(() => user.id);
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setStock({ ...stock, [name]: value });
   };
 
+  const retrieveProducts = () => {
+    ProductService.getAll()
+      .then((response) => {
+        setProducts(response.data);
+        setStock({
+          ...stock,
+          productId: response.data[0].id,
+        });
+
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   const saveStock = () => {
     var data = {
-      cost_price: stock.cost,
-      cost_sell: stock.cost_sell,
-      entry_date: stock.entry_date,
+      productId: stock.productId,
       quantity: stock.quantity,
-      product_id: stock.product_id,
-      seller_id: stock.seller_id,
+      entryDate: stock.entryDate,
+      costPrice: stock.costPrice,
+      costSell: stock.costSell,
+      sellerId: sellerId,
     };
+    console.log(data);
 
     StockService.create(data)
       .then((response) => {
         setStock({
           id: response.data.id,
-          cost_price: response.data.cost_price,
-          cost_sell: response.data.cost_sell,
-          entry_date: response.data.entry_date,
+          costPrice: response.data.costPrice,
+          costSell: response.data.costSell,
+          entryDate: response.data.entryDate,
           quantity: response.data.quantity,
-          stock_id: response.data.stock_id,
-          seller_id: response.data.seller_id,
+          productId: response.data.product,
+          sellerId: response.data.seller,
         });
         setSubmitted(true);
         console.log(response.data);
@@ -49,7 +77,15 @@ const AddStock = () => {
   };
 
   const newStock = () => {
-    setStock(initialStockState);
+    setStock({
+      ...stock,
+      id: null,
+      costPrice: "",
+      costSell: "",
+      entryDate: Date.now(),
+      quantity: "",
+      productId: products[0].id,
+    });
     setSubmitted(false);
   };
 
@@ -65,41 +101,45 @@ const AddStock = () => {
       ) : (
         <div>
           <div className="form-group">
-            <label htmlFor="cost_price">Preço de custo</label>
+            <label htmlFor="costPrice">Preço de custo</label>
             <input
-              type="text"
+              type="number"
+              min="0"
+              step="0.1"
               className="form-control"
-              id="cost_price"
+              id="costPrice"
               required
-              value={stock.cost_price}
+              value={stock.costPrice}
               onChange={handleInputChange}
-              name="cost_price"
+              name="costPrice"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="cost_sell">Preço de venda</label>
+            <label htmlFor="costSell">Preço de venda</label>
             <input
-              type="text"
+              type="number"
+              min="0"
+              step="0.1"
               className="form-control"
-              id="cost_sell"
+              id="costSell"
               required
-              value={stock.cost_sell}
+              value={stock.costSell}
               onChange={handleInputChange}
-              name="cost_sell"
+              name="costSell"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="entry_date">Data de entrada</label>
+            <label htmlFor="entryDate">Data de entrada</label>
             <input
-              type="text"
+              type="datetime-local"
               className="form-control"
-              id="entry_date"
+              id="entryDate"
               required
-              value={stock.entry_date}
+              value={stock.entryDate}
               onChange={handleInputChange}
-              name="entry_date"
+              name="entryDate"
             />
           </div>
 
@@ -117,29 +157,22 @@ const AddStock = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="product_id">Produto</label>
-            <input
-              type="text"
-              className="form-control"
-              id="product_id"
-              required
-              value={stock.product_id}
+            <label htmlFor="productId">Produto</label>
+            <select
+              value={stock.productId}
               onChange={handleInputChange}
-              name="product_id"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="seller_id">Vendedor</label>
-            <input
-              type="text"
-              className="form-control"
-              id="seller_id"
+              name="productId"
               required
-              value={stock.seller_id}
-              onChange={handleInputChange}
-              name="seller_id"
-            />
+              className="form-control"
+              id="productId"
+            >
+              {products &&
+                products.map((product) => (
+                  <option key={product.id} value={product.id}>
+                    {product.name}
+                  </option>
+                ))}
+            </select>
           </div>
 
           <button onClick={saveStock} className="btn btn-success">
