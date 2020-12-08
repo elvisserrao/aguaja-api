@@ -99,87 +99,87 @@ const AddStock = () => {
           </button>
         </div>
       ) : (
-        <div>
-          <div className="form-group">
-            <label htmlFor="costPrice">Preço de custo</label>
-            <input
-              type="number"
-              min="0"
-              step="0.1"
-              className="form-control"
-              id="costPrice"
-              required
-              value={stock.costPrice}
-              onChange={handleInputChange}
-              name="costPrice"
-            />
-          </div>
+          <div>
+            <div className="form-group">
+              <label htmlFor="costPrice">Preço de custo</label>
+              <input
+                type="number"
+                min="0"
+                step="0.1"
+                className="form-control"
+                id="costPrice"
+                required
+                value={stock.costPrice}
+                onChange={handleInputChange}
+                name="costPrice"
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="costSell">Preço de venda</label>
-            <input
-              type="number"
-              min="0"
-              step="0.1"
-              className="form-control"
-              id="costSell"
-              required
-              value={stock.costSell}
-              onChange={handleInputChange}
-              name="costSell"
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="costSell">Preço de venda</label>
+              <input
+                type="number"
+                min="0"
+                step="0.1"
+                className="form-control"
+                id="costSell"
+                required
+                value={stock.costSell}
+                onChange={handleInputChange}
+                name="costSell"
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="entryDate">Data de entrada</label>
-            <input
-              type="datetime-local"
-              className="form-control"
-              id="entryDate"
-              required
-              value={stock.entryDate}
-              onChange={handleInputChange}
-              name="entryDate"
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="entryDate">Data de entrada</label>
+              <input
+                type="datetime-local"
+                className="form-control"
+                id="entryDate"
+                required
+                value={stock.entryDate}
+                onChange={handleInputChange}
+                name="entryDate"
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="quantity">Quantidade</label>
-            <input
-              type="text"
-              className="form-control"
-              id="quantity"
-              required
-              value={stock.quantity}
-              onChange={handleInputChange}
-              name="quantity"
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="quantity">Quantidade</label>
+              <input
+                type="text"
+                className="form-control"
+                id="quantity"
+                required
+                value={stock.quantity}
+                onChange={handleInputChange}
+                name="quantity"
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="productId">Produto</label>
-            <select
-              value={stock.productId}
-              onChange={handleInputChange}
-              name="productId"
-              required
-              className="form-control"
-              id="productId"
-            >
-              {products &&
-                products.map((product) => (
-                  <option key={product.id} value={product.id}>
-                    {product.name}
-                  </option>
-                ))}
-            </select>
-          </div>
+            <div className="form-group">
+              <label htmlFor="productId">Produto</label>
+              <select
+                value={stock.productId}
+                onChange={handleInputChange}
+                name="productId"
+                required
+                className="form-control"
+                id="productId"
+              >
+                {products &&
+                  products.map((product) => (
+                    <option key={product.id} value={product.id}>
+                      {product.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
 
-          <button onClick={saveStock} className="btn btn-success">
-            Salvar
+            <button onClick={saveStock} className="btn btn-success">
+              Salvar
           </button>
-        </div>
-      )}
+          </div>
+        )}
     </div>
   );
 };
