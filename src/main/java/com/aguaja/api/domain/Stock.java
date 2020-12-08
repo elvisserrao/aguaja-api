@@ -1,7 +1,7 @@
 package com.aguaja.api.domain;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +25,7 @@ public class Stock implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer quantity;
-	private Instant entryDate;
+	private Date entryDate;
 	private Double costPrice;
 	private Double costSell;
 
@@ -44,7 +44,7 @@ public class Stock implements Serializable{
 		super();
 	}
 
-	public Stock(Long id, Product product, Integer quantity, Instant entryDate, Double costPrice, Double costSell, Seller seller) {
+	public Stock(Long id, Product product, Integer quantity, Date entryDate, Double costPrice, Double costSell, Seller seller) {
 		this.id = id;
 		this.product = product;
 		this.quantity = quantity;
@@ -68,10 +68,10 @@ public class Stock implements Serializable{
 		this.quantity = quantity;
 	}
 
-	public Instant getEntryDate() {
+	public Date getEntryDate() {
 		return entryDate;
 	}
-	public void setEntryDate(Instant entryDate) {
+	public void setEntryDate(Date entryDate) {
 		this.entryDate = entryDate;
 	}
 
