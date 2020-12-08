@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from "react";
 import StockService from "../../services/stock.service";
+import ProductService from "../../services/product.service";
+import AuthService from "../../services/auth.service";
 
 const EditStock = (props) => {
   const initialStockState = {
     id: null,
-    cost_price: "",
-    cost_sell: "",
-    cost_sellentry_date: "",
+    costPrice: "",
+    costSell: "",
+    entryDate: Date.now(),
     quantity: "",
-    product_id: "",
-    seller_id: "",
+    productId: "",
+    sellerId: "",
   };
+  const [products, setProducts] = useState([]);
+  const [stock, setStock] = useState(initialStockState);
+  const [sellerId, setSellerId] = useState();
   const [currentStock, setCurrentStock] = useState(initialStockState);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    retrieveProducts();
+
+    const user = AuthService.getCurrentUser();
+
+    setSellerId(() => user.id);
+  }, []);
 
   const getStock = (id) => {
     StockService.get(id)
@@ -33,17 +46,32 @@ const EditStock = (props) => {
     const { name, value } = event.target;
     setCurrentStock({ ...currentStock, [name]: value });
   };
+  const retrieveProducts = () => {
+    ProductService.getAll()
+      .then((response) => {
+        setProducts(response.data);
+        setStock({
+          ...stock,
+          productId: response.data[0].id,
+        });
 
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   const updatePublished = () => {
     var data = {
       id: currentStock.id,
       cost_price: currentStock.cost,
-      cost_sell: currentStock.cost_sell,
-      entry_date: currentStock.entry_date,
+      costSell: currentStock.costSell,
+      entryDate: currentStock.entryDate,
       quantity: currentStock.quantity,
-      product_id: currentStock.product_id,
-      seller_id: currentStock.seller_id,
+      productId: currentStock.productId,
+      sellerId: sellerId,
     };
+
 
     StockService.update(currentStock.id, data)
       .then((response) => {
@@ -83,89 +111,75 @@ const EditStock = (props) => {
         <div className="edit-form">
           <h4>Estoque</h4>
           <form>
+
             <div className="form-group">
-              <label htmlFor="description">Descrição</label>
+              <label htmlFor="costPrice">Preço de custo</label>
               <input
                 type="text"
                 className="form-control"
-                id="description"
-                name="description"
-                value={currentStock.description}
+                id="costPrice"
+                required
+                value={currentStock.costPrice}
                 onChange={handleInputChange}
+                name="costPrice"
               />
             </div>
+
             <div className="form-group">
-            <label htmlFor="cost_price">Preço de custo</label>
-            <input
-              type="text"
-              className="form-control"
-              id="cost_price"
-              required
-              value={currentStock.cost_price}
-              onChange={handleInputChange}
-              name="cost_price"
-            />
-          </div>
+              <label htmlFor="costSell">Preço de venda</label>
+              <input
+                type="text"
+                className="form-control"
+                id="costSell"
+                value={currentStock.costSell}
+                onChange={handleInputChange}
+                name="costSell"
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="cost_sell">Preço de venda</label>
-            <input
-              type="text"
-              className="form-control"
-              id="cost_sell"
-              value={currentStock.cost_sell}
-              onChange={handleInputChange}
-              name="cost_sell"
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="entryDate">Data de entrada</label>
+              <input
+                type="datatime-local"
+                className="form-control"
+                id="entryDate"
+                value={currentStock.entryDate}
+                onChange={handleInputChange}
+                name="entryDate"
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="entry_date">Data de entrada</label>
-            <input
-              type="text"
-              className="form-control"
-              id="entry_date"
-              value={currentStock.entry_date}
-              onChange={handleInputChange}
-              name="entry_date"
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="quantity">Quantidade</label>
+              <input
+                type="text"
+                className="form-control"
+                id="quantity"
+                value={currentStock.quantity}
+                onChange={handleInputChange}
+                name="quantity"
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="quantity">Quantidade</label>
-            <input
-              type="text"
-              className="form-control"
-              id="quantity"
-              value={currentStock.quantity}
-              onChange={handleInputChange}
-              name="quantity"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="product_id">Produto</label>
-            <input
-              type="text"
-              className="form-control"
-              id="product_id"
-              value={currentStock.product_id}
-              onChange={handleInputChange}
-              name="product_id"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="seller_id">Vendedor</label>
-            <input
-              type="text"
-              className="form-control"
-              id="seller_id"
-              value={currentStock.seller_id}
-              onChange={handleInputChange}
-              name="seller_id"
-            />
-          </div>
+            
+            <div className="form-group">
+              <label htmlFor="productId">Produto</label>
+              <select
+                value={currentStock.productId}
+                onChange={handleInputChange}
+                name="productId"
+                required
+                className="form-control"
+                id="productId"
+              >
+                {products &&
+                  products.map((product) => (
+                    <option key={product.id} value={product.id}>
+                      {product.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
           </form>
 
           <button
@@ -189,11 +203,11 @@ const EditStock = (props) => {
           <p>{message}</p>
         </div>
       ) : (
-        <div>
-          <br />
-          <p>Por favor clique em um produto...</p>
-        </div>
-      )}
+          <div>
+            <br />
+            <p>Por favor clique em um produto...</p>
+          </div>
+        )}
     </div>
   );
 };
