@@ -1,11 +1,34 @@
 import React, { useState, useEffect } from "react";
 
 import { Modal, Button, Table } from "react-bootstrap";
+import OrderService from "../services/order.service";
 
 function StockModal(props) {
   useEffect(() => {
     console.log(props.stocks, props.product);
   });
+
+  const createOrder = (stock) => {
+    const data = {
+      price: stock.price,
+      orderStatus: 1,
+      date: Date.now(),
+      client_id: props.user.id,
+      seller_id: stock.seller_id,
+      item: {
+        stock_id: stock.id,
+        quantity: 1,
+      },
+    };
+    OrderService.create(data)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <Modal
       {...props}
@@ -35,7 +58,7 @@ function StockModal(props) {
                   <td>1</td>
                   <td>{props.product.name}</td>
                   <td>R${stock.costPrice}</td>
-                  <Button className="" variant="primary">
+                  <Button onClick={createOrder} variant="primary">
                     Realizar pedido!
                   </Button>
                 </tr>
