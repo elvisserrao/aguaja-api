@@ -9,6 +9,7 @@ const AddProduct = () => {
     liters: 0,
     urlImage: "",
   };
+
   const [product, setProduct] = useState(initialProductState);
   const [submitted, setSubmitted] = useState(false);
 
