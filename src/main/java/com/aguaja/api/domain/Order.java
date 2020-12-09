@@ -45,7 +45,7 @@ public class Order implements Serializable{
 		super();
 	}
 
-	public Order(Long id, Date date, Double price, Double discount, Double priceTotal, OrderStatus orderStatus, Seller seller, Client client, OrderItem item) {
+	public Order(Long id, Date date, Double price, Double discount, Double priceTotal, Integer orderStatus, Seller seller, Client client, OrderItem item) {
 		this.id = id;
 		this.date = date;
 		this.price = price;
@@ -53,19 +53,18 @@ public class Order implements Serializable{
 		this.priceTotal = priceTotal;
 		this.seller = seller;
 		this.client = client;
-		this.orderStatus = orderStatus.getCode();
+		this.orderStatus = orderStatus;
 		items.add(item);
 	}
 	
-	public Order(Long id, Date date, Double price, Double discount, Double priceTotal, OrderStatus orderStatus, Client client, OrderItem item) {
+	public Order(Long id, Date date, Double price, Double discount, Double priceTotal, Integer orderStatus, Client client) {
 		this.id = id;
 		this.date = date;
 		this.price = price;
 		this.discount = discount;
 		this.priceTotal = priceTotal;
 		this.client = client;
-		this.orderStatus = orderStatus.getCode();
-		items.add(item);
+		this.orderStatus = orderStatus;
 	}
 
 	public Long getId() {
@@ -106,10 +105,8 @@ public class Order implements Serializable{
 	public OrderStatus getOrderStatus() {
 		return OrderStatus.valueOf(orderStatus);
 	}
-	public void setOrderStatus(OrderStatus orderStatus) {
-		if(orderStatus != null) {
-			this.orderStatus = orderStatus.getCode();
-		}
+	public void setOrderStatus(Integer orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	public Client getClient() {
