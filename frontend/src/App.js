@@ -13,7 +13,7 @@ import ProductsList from "./components/Admin/ProductsList";
 import EditProduct from "./components/Admin/EditProduct";
 import AddStock from "./components/Seller/AddStock";
 import EditStock from "./components/Seller/EditStock";
-
+import StocksList from "./components/Seller/StocksList";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -100,6 +100,7 @@ const App = () => {
           <Route exact path="/admin/products/:id" component={EditProduct} />
           <Route exact path="/seller/stock/new" component={AddStock} />
           <Route exact path="/seller/stocks/:id" component={EditStock} />
+          <Route exact path="/seller/stocks/" component={StocksList} />
         </Switch>
       </div>
     </div>
