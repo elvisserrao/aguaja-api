@@ -9,6 +9,10 @@ const StockService = {
     return http.get(`/stock/${id}`);
   },
 
+  getByProduct: (id) => {
+    return http.get(`/stock/product/${id}`);
+  },
+
   create: (data) => {
     return http.post("/stock", data);
   },
