@@ -45,7 +45,7 @@ public class Order implements Serializable{
 		super();
 	}
 
-	public Order(Long id, Date date, Double price, Double discount, Double priceTotal, Integer orderStatus, Seller seller, Client client, OrderItem item) {
+	public Order(Long id, Date date, Double price, Double discount, Double priceTotal, OrderStatus orderStatus, Seller seller, Client client, OrderItem item) {
 		this.id = id;
 		this.date = date;
 		this.price = price;
