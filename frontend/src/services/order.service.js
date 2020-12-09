@@ -9,6 +9,10 @@ const OrderService = {
     return http.get(`/order/${id}`);
   },
 
+  getAllOpen: () => {
+    return http.get(`/order/open`);
+  },
+
   create: (data) => {
     return http.post("/order", data);
   },
