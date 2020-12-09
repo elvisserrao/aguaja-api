@@ -12,8 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.aguaja.api.domain.Order;
 import com.aguaja.api.domain.OrderItem;
+import com.aguaja.api.domain.Seller;
+import com.aguaja.api.domain.enums.OrderStatus;
 import com.aguaja.api.repositories.OrderItemRepository;
 import com.aguaja.api.repositories.OrderRepository;
+import com.aguaja.api.repositories.SellerRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 
@@ -21,6 +24,9 @@ import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 public class OrderServico {
 	@Autowired
 	private OrderRepository repository;
+
+	@Autowired
+	SellerServico sellerService;
 	
 	@Autowired
 	private OrderItemRepository orderItemRepository;
@@ -33,11 +39,24 @@ public class OrderServico {
 		Optional<Order> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
+
 	
-	public Order insert(Order obj, OrderItem item) {
-		addItem(obj, item);
-		repository.save(obj);
+	public List<Order> findByStatusOpen() {
+		List<Order> obj = repository.findByOrderStatus(1);
 		return obj;
+	}
+
+	public Order findBySellerId(Long id) {
+		Seller seller = sellerService.findById(id);
+		Optional<Order> obj = repository.findBySeller(seller);
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+	}
+	
+	public Order insert(Order order, OrderItem item) {
+		order.getItems().add(item);
+		repository.save(order);
+		orderItemRepository.save(item);
+		return order;
 	}
 	
 	public void delete(Long id) {
@@ -70,9 +89,5 @@ public class OrderServico {
 		entity.setDiscount(obj.getDiscount());
 		entity.setPriceTotal(obj.getPriceTotal());
 		
-	}
-	private void addItem(Order order, OrderItem item) {
-		orderItemRepository.save(item);
-		order.getItems().add(item);
 	}
 }
