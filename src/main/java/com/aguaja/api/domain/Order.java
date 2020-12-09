@@ -53,7 +53,18 @@ public class Order implements Serializable{
 		this.priceTotal = priceTotal;
 		this.seller = seller;
 		this.client = client;
-		this.orderStatus = orderStatus;
+		this.orderStatus = orderStatus.getCode();
+		items.add(item);
+	}
+	
+	public Order(Long id, Date date, Double price, Double discount, Double priceTotal, OrderStatus orderStatus, Client client, OrderItem item) {
+		this.id = id;
+		this.date = date;
+		this.price = price;
+		this.discount = discount;
+		this.priceTotal = priceTotal;
+		this.client = client;
+		this.orderStatus = orderStatus.getCode();
 		items.add(item);
 	}
 
