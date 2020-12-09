@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.aguaja.api.domain.Order;
+import com.aguaja.api.domain.OrderItem;
 import com.aguaja.api.services.OrderServico;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -38,8 +39,8 @@ public class OrderController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Order> insert(@RequestBody Order obj){
-		obj = service.insert(obj);
+	public ResponseEntity<Order> insert(@RequestBody Order obj, @RequestBody OrderItem orderItem){
+		obj = service.insert(obj, orderItem);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);
 	}

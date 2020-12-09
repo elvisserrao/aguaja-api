@@ -11,6 +11,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.aguaja.api.domain.Order;
+import com.aguaja.api.domain.OrderItem;
+import com.aguaja.api.repositories.OrderItemRepository;
 import com.aguaja.api.repositories.OrderRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
@@ -19,6 +21,9 @@ import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 public class OrderServico {
 	@Autowired
 	private OrderRepository repository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	public List<Order> findAll(){
 		return repository.findAll();
@@ -29,7 +34,8 @@ public class OrderServico {
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Order insert(Order obj) {
+	public Order insert(Order obj, OrderItem item) {
+		addItem(obj, item);
 		repository.save(obj);
 		return obj;
 	}
@@ -64,5 +70,9 @@ public class OrderServico {
 		entity.setDiscount(obj.getDiscount());
 		entity.setPriceTotal(obj.getPriceTotal());
 		
+	}
+	private void addItem(Order order, OrderItem item) {
+		orderItemRepository.save(item);
+		order.getItems().add(item);
 	}
 }
