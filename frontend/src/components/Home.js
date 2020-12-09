@@ -193,6 +193,7 @@ const Home = () => {
         </div>
       </div>
       <StockModal
+        user={currentUser}
         stocks={stocks}
         show={modalShow}
         onHide={() => setModalShow(false)}
