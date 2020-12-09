@@ -48,6 +48,12 @@ public class StockController {
 		Stock obj = stockService.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
+
+	@GetMapping(value = "/product/{id}")
+	public ResponseEntity<List<Stock>> findByProductId(@PathVariable Long id) {
+		List<Stock> list = stockService.findByProduct(id);
+		return ResponseEntity.ok().body(list);
+	}
 	
 	@PostMapping
 	public ResponseEntity<Stock> insert(@RequestBody StockDTO obj){
