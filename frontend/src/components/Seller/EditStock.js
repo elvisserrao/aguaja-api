@@ -46,6 +46,7 @@ const EditStock = (props) => {
     const { name, value } = event.target;
     setCurrentStock({ ...currentStock, [name]: value });
   };
+
   const retrieveProducts = () => {
     ProductService.getAll()
       .then((response) => {
