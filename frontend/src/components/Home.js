@@ -1,14 +1,46 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
+import StockModal from "./Modal";
 
 import AuthService from "../services/auth.service";
+import ProductService from "../services/product.service";
+import StockService from "../services/stock.service";
 
 const Home = () => {
+  const [modalShow, setModalShow] = useState(false);
   const [currentUser, setCurrentUser] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [stocks, setStocks] = useState([]);
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     setCurrentUser(user);
+
+    retrieveProducts();
   }, []);
+
+  const findByProduct = (product) => {
+    StockService.getByProduct(product.id)
+      .then((response) => {
+        console.log(response.data);
+        setStocks(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const retrieveProducts = () => {
+    ProductService.getAll()
+      .then((response) => {
+        setProducts(response.data);
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   return (
     <>
@@ -47,9 +79,11 @@ const Home = () => {
               com a distância do cliente para seu estabelecimento. Aquele
               vendedor que aceitar primeiro o pedido terá preferência.
             </p>
-            <a class="btn btn-primary btn-lg" href="/register">
-              Cadastre-se já! &raquo;
-            </a>
+            {!currentUser && (
+              <a class="btn btn-primary btn-lg" href="/register">
+                Cadastre-se já! &raquo;
+              </a>
+            )}
           </div>
           <div class="col-md-4 mb-5">
             <h2>Contato:</h2>
@@ -73,6 +107,32 @@ const Home = () => {
         </div>
 
         <div class="row">
+          {products &&
+            products.map((product) => (
+              <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                  <img class="card-img-top" src={product.urlImage} alt=""></img>
+                  <div class="card-body text-center">
+                    <h4 class="card-title">{`${product.name} - ${product.liters}L`}</h4>
+                    <br />
+                    <h5 class="card-text">{product.description}</h5>
+                  </div>
+                  <div class="card-footer text-center">
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        setProduct(product);
+                        findByProduct(product);
+                        setModalShow(true);
+                      }}
+                    >
+                      Peça já a sua!
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+
           <div class="col-md-4 mb-5">
             <div class="card h-100">
               <img
@@ -86,8 +146,8 @@ const Home = () => {
                 <h5 class="card-text">R$17.50</h5>
               </div>
               <div class="card-footer text-center">
-                <a href="#" class="btn btn-primary">
-                  Aproveita já essa oferta!
+                <a href="/register" class="btn btn-primary">
+                  Peça já a sua!
                 </a>
               </div>
             </div>
@@ -106,7 +166,7 @@ const Home = () => {
               </div>
               <div class="card-footer text-center">
                 <a href="#" class="btn btn-primary">
-                  Aproveita já essa oferta!
+                  Peça já a sua!
                 </a>
               </div>
             </div>
@@ -125,13 +185,20 @@ const Home = () => {
               </div>
               <div class="card-footer text-center">
                 <a href="#" class="btn btn-primary">
-                  Aproveita já essa oferta!
+                  Peça já a sua!
                 </a>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <StockModal
+        user={currentUser}
+        stocks={stocks}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        product={product}
+      />
     </>
   );
 };

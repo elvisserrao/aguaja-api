@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.aguaja.api.domain.interfaces.HasPhone;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_client")
@@ -137,7 +138,8 @@ public class Client implements Serializable, HasPhone {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
+	
+	@JsonIgnore
 	public List<Order> getOrders() {
 		return orders;
 	}

@@ -46,6 +46,7 @@ const EditStock = (props) => {
     const { name, value } = event.target;
     setCurrentStock({ ...currentStock, [name]: value });
   };
+
   const retrieveProducts = () => {
     ProductService.getAll()
       .then((response) => {
@@ -55,27 +56,6 @@ const EditStock = (props) => {
           productId: response.data[0].id,
         });
 
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-  const updatePublished = () => {
-    var data = {
-      id: currentStock.id,
-      cost_price: currentStock.cost,
-      costSell: currentStock.costSell,
-      entryDate: currentStock.entryDate,
-      quantity: currentStock.quantity,
-      productId: currentStock.productId,
-      sellerId: sellerId,
-    };
-
-
-    StockService.update(currentStock.id, data)
-      .then((response) => {
-        setCurrentStock({ ...currentStock });
         console.log(response.data);
       })
       .catch((e) => {
@@ -111,7 +91,6 @@ const EditStock = (props) => {
         <div className="edit-form">
           <h4>Estoque</h4>
           <form>
-
             <div className="form-group">
               <label htmlFor="costPrice">Preço de custo</label>
               <input
@@ -161,7 +140,6 @@ const EditStock = (props) => {
               />
             </div>
 
-            
             <div className="form-group">
               <label htmlFor="productId">Produto</label>
               <select
@@ -182,13 +160,6 @@ const EditStock = (props) => {
             </div>
           </form>
 
-          <button
-            className="badge badge-primary mr-2"
-            onClick={() => updatePublished()}
-          >
-            Atualizar
-          </button>
-
           <button className="badge badge-danger mr-2" onClick={deleteStock}>
             Deletar
           </button>
@@ -203,11 +174,11 @@ const EditStock = (props) => {
           <p>{message}</p>
         </div>
       ) : (
-          <div>
-            <br />
-            <p>Por favor clique em um produto...</p>
-          </div>
-        )}
+        <div>
+          <br />
+          <p>Por favor clique em um produto...</p>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 package com.aguaja.api.domain;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,8 +23,8 @@ public class Order implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private Instant date;
+	private Long id;
+	private Date date;
 	private Double price;
 	private Double discount;
 	private Double priceTotal;
@@ -45,7 +45,7 @@ public class Order implements Serializable{
 		super();
 	}
 
-	public Order(Integer id, Instant date, Double price, Double discount, Double priceTotal, OrderStatus orderstatus, Seller seller, Client client) {
+	public Order(Long id, Date date, Double price, Double discount, Double priceTotal, Integer orderStatus, Seller seller, Client client, OrderItem item) {
 		this.id = id;
 		this.date = date;
 		this.price = price;
@@ -53,19 +53,31 @@ public class Order implements Serializable{
 		this.priceTotal = priceTotal;
 		this.seller = seller;
 		this.client = client;
+		this.orderStatus = orderStatus;
+		items.add(item);
+	}
+	
+	public Order(Long id, Date date, Double price, Double discount, Double priceTotal, Integer orderStatus, Client client) {
+		this.id = id;
+		this.date = date;
+		this.price = price;
+		this.discount = discount;
+		this.priceTotal = priceTotal;
+		this.client = client;
+		this.orderStatus = orderStatus;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Instant getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(Instant date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -90,13 +102,15 @@ public class Order implements Serializable{
 		this.priceTotal = priceTotal;
 	}
 
+	public Integer getOrderStatusId() {
+		return orderStatus;
+	}
+
 	public OrderStatus getOrderStatus() {
 		return OrderStatus.valueOf(orderStatus);
 	}
-	public void setOrderStatus(OrderStatus orderStatus) {
-		if(orderStatus != null) {
-			this.orderStatus = orderStatus.getCode();
-		}
+	public void setOrderStatus(Integer orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	public Client getClient() {

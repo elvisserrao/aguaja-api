@@ -10,7 +10,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.aguaja.api.domain.Product;
 import com.aguaja.api.domain.Stock;
+import com.aguaja.api.repositories.ProductRepository;
 import com.aguaja.api.repositories.StockRepository;
 import com.aguaja.api.services.exceptions.DatabaseException;
 import com.aguaja.api.services.exceptions.ResourceNotFoundException;
@@ -19,6 +21,9 @@ import com.aguaja.api.services.exceptions.ResourceNotFoundException;
 public class StockServico {
 	@Autowired
 	private StockRepository repository;
+
+	@Autowired
+	ProductServico productServico;
 	
 	public List<Stock> findAll(){
 		return repository.findAll();
@@ -27,6 +32,12 @@ public class StockServico {
 	public Stock findById(Long id) {
 		Optional<Stock> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+	}
+
+	public List<Stock> findByProduct(Long id) {
+		Product product = productServico.findById(id);
+		List<Stock> obj = repository.findByProduct(product);
+		return obj;
 	}
 	
 	public Stock insert(Stock obj) {

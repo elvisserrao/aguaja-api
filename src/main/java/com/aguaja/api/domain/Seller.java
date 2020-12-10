@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.aguaja.api.domain.interfaces.HasPhone;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_seller")
@@ -40,6 +41,7 @@ public class Seller implements Serializable, HasPhone {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "seller")
 	private List<Order> orders = new ArrayList<>();
 

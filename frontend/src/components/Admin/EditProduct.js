@@ -9,6 +9,7 @@ const Product = (props) => {
     liters: "",
     urlImage: "",
   };
+
   const [currentProduct, setCurrentProduct] = useState(initialProductState);
   const [message, setMessage] = useState("");
 
