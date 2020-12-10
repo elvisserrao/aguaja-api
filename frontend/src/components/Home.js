@@ -63,7 +63,7 @@ const Home = () => {
 
       <div class="container">
         <div class="row">
-          <div class="col-md-8 mb-5">
+          <div class="col-md-8 mb-5 text-justify">
             <h2>O que nós fazemos?</h2>
             <hr />
             <p>
