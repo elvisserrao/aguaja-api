@@ -102,6 +102,10 @@ public class Order implements Serializable{
 		this.priceTotal = priceTotal;
 	}
 
+	public Integer getOrderStatusId() {
+		return orderStatus;
+	}
+
 	public OrderStatus getOrderStatus() {
 		return OrderStatus.valueOf(orderStatus);
 	}

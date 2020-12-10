@@ -88,6 +88,6 @@ public class OrderServico {
 		entity.setPrice(obj.getPrice());
 		entity.setDiscount(obj.getDiscount());
 		entity.setPriceTotal(obj.getPriceTotal());
-		
+		entity.setOrderStatus(obj.getOrderStatusId());
 	}
 }
