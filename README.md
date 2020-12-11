@@ -16,6 +16,8 @@ API REST para integração de clientes web ou mobile com a plataforma Água Já.
   - Spring Framework 2.3.5
   - Maven 4.0.0
   - Apache Tomcat 9.0.39
+  - Node 14.14.9
+  - Yarn 1.22.10
 
 ### Executando
 
